@@ -59,16 +59,96 @@ namespace fbkc
         }
 
         /// <summary>
+        /// 获取栏目页网页
+        /// </summary>
+        /// <param name="sqlstr"></param>
+        /// <returns></returns>
+        public List<htmlPara> GetHtmlList(string sqlstr)
+        {
+            List<htmlPara> hList = new List<htmlPara>();
+            DataTable dt = SqlHelperCatalog.ExecuteDataSet("select * from htmlPara " + sqlstr).Tables[0];
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                htmlPara hPara = new htmlPara();
+                hPara.Id = (long)row["Id"];
+                hPara.userId = row["userId"].ToString();
+                hPara.title = (string)row["title"];
+                hPara.titleImg = (string)row["titleImg"];
+                hPara.titleURL = (string)row["titleURL"];
+                hPara.columnId = (string)row["columnId"];//栏目Id
+                string content = (string)row["articlecontent"];
+                if (content.Length > 60)
+                    content = "<p>" + content.Substring(0, 60) + "...</p>";
+                else
+                    content = "<p>" + content.Substring(0, content.Length) + "...</p>";
+                hPara.articlecontent = content;//产品简介
+                hPara.city = (string)row["city"];//生产城市
+                hPara.smallCount = (string)row["smallCount"];//起订
+                hPara.companyName = (string)row["companyName"];//公司名字
+                hPara.ten_qq = (string)row["ten_qq"];
+                hPara.com_web = (string)row["com_web"];//网址
+                hPara.addTime = row["addTime"].ToString();
+                hList.Add(hPara);
+            }
+            return hList;
+        }
+
+        /// <summary>
+        /// 获取目录主页内容
+        /// </summary>
+        /// <param name="sqlstr"></param>
+        /// <returns></returns>
+        public List<htmlInfo> GetMainHtmlList()
+        {
+            List<htmlInfo> hList = new List<htmlInfo>();
+            //            DataTable dt = SqlHelper.ExecuteDataSet(@"select title,titleImg,titleURL,addTime,columnId,columnName from 
+            //( select 
+            //RANK()OVER(PARTITION BY columnInfo.Id ORDER BY htmlInfo.addTime DESC) AS
+            //RANK2, title,titleImg,titleURL,addTime,htmlInfo.columnId,columnName from 
+            //htmlInfo left join columnInfo On htmlInfo.columnId = columnInfo.Id) T
+            //where RANK2<=10 ").Tables[0];
+            DataTable dt = SqlHelperCatalog.ExecuteDataSet(@"select  title,titleURL,titleImg,addTime,columnId from 
+( select 
+RANK()OVER(PARTITION BY columnId ORDER BY addTime DESC) AS
+RANK2, title,titleImg,titleURL,addTime,columnId from 
+htmlPara ) T
+where RANK2<=10").Tables[0];
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                htmlInfo hInfo = new htmlInfo();
+                hInfo.title = (string)row["title"];
+                hInfo.titleImg = (string)row["titleImg"];
+                hInfo.titleURL = (string)row["titleURL"];
+                hInfo.columnId = (string)row["columnId"];//栏目Id
+                hInfo.addTime = row["addTime"].ToString();
+                //hInfo.realmNameId = (string)row["realmNameId"];//目录名
+                hList.Add(hInfo);
+            }
+            return hList;
+        }
+
+        /// <summary>
         /// 将html内容参数存入数据库
         /// </summary>
         /// <param name="info"></param>
-        public void AddHtml(htmlInfo info)
+        public void AddHtml(htmlPara info)
         {
-            int a = SqlHelper1.ExecuteNonQuery(@"INSERT INTO [AutouSend].[dbo].[htmlInfo]
-           ([title]
+            int a = SqlHelperCatalog.ExecuteNonQuery(@"INSERT INTO [AutouSend].[dbo].[htmlPara]
+         ([title]
            ,[titleURL]
            ,[articlecontent]
            ,[columnId]
+           ,[pinpai]
+           ,[xinghao]
+           ,[price]
+           ,[smallCount]
+           ,[sumCount]
+           ,[unit]
+           ,[city]
            ,[titleImg]
            ,[addTime]
            ,[userId])
@@ -77,6 +157,13 @@ namespace fbkc
            ,@titleURL
            ,@articlecontent
            ,@columnId
+           ,@pinpai
+           ,@xinghao
+           ,@price
+           ,@smallCount
+           ,@sumCount
+           ,@unit
+           ,@city
            ,@titleImg
            ,@addTime
            ,@userId)",
@@ -84,6 +171,13 @@ namespace fbkc
                new SqlParameter("@titleURL", SqlHelper.ToDBNull(info.titleURL)),
                new SqlParameter("@articlecontent", SqlHelper.ToDBNull(info.articlecontent)),
                new SqlParameter("@columnId", SqlHelper.ToDBNull(info.columnId)),
+               new SqlParameter("@pinpai", SqlHelper.ToDBNull(info.pinpai)),
+               new SqlParameter("@xinghao", SqlHelper.ToDBNull(info.xinghao)),
+               new SqlParameter("@price", SqlHelper.ToDBNull(info.price)),
+               new SqlParameter("@smallCount", SqlHelper.ToDBNull(info.smallCount)),
+               new SqlParameter("@sumCount", SqlHelper.ToDBNull(info.sumCount)),
+               new SqlParameter("@unit", SqlHelper.ToDBNull(info.unit)),
+               new SqlParameter("@city", SqlHelper.ToDBNull(info.city)),
                new SqlParameter("@titleImg", SqlHelper.ToDBNull(info.titleImg)),
                new SqlParameter("@addTime", SqlHelper.ToDBNull(info.addTime)),
                new SqlParameter("@userId", SqlHelper.ToDBNull(info.userId)));
@@ -98,7 +192,9 @@ namespace fbkc
             object ob = "";
             try
             {
-                ob = SqlHelper1.ExecuteScalar("select Id  from htmlInfo order by Id desc");
+                ob = SqlHelperCatalog.ExecuteScalar("select Id  from htmlPara order by Id desc");
+                if (ob == null)
+                    ob = 0;
             }
             catch (Exception ex)
             { return 1; }

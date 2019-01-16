@@ -8,9 +8,9 @@ using System.Data;
 
 namespace HRMSys.DAL
 {
-    class SqlHelper1
+    class SqlHelperCatalog
     {
-        private static string connStr = "Data Source=39.105.196.3;Initial Catalog=100dh_hyzx;User ID=lhc;Password=123456";
+        private static string connStr = ConfigurationManager.ConnectionStrings["connStr_100dh_hyzx"].ConnectionString.ToString();
         //封装的原则：把不变的放到方法里 吧变化的（string sql）传到参数里
         public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
         {

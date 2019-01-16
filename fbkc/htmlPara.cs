@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Model
 {
-    public class htmlInfo
+    public class htmlPara
     {
         public long Id { get; set; }
         public string title { get; set; }
@@ -19,6 +19,9 @@ namespace Model
         public string sumCount { get; set; }
         public string unit { get; set; }
         public string city { get; set; }
+        public string ten_qq { get; set; }
+        public string companyName { get; set; }
+        public string com_web { get; set; }
         public string addTime { get; set; }
         public string columnId { get; set; }
         public string userId { get; set; }
