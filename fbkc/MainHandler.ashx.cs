@@ -46,14 +46,14 @@ namespace fbkc
         /// <returns></returns>
         public string GetMainHtmlInfo(HttpContext context)
         {
-            string realmNameId = "1";//目录名
+            //string realmNameId = "1";//目录名
             string columnId = context.Request["columnId"];//行业id
 
             List<htmlInfo> hList = null;
             try
             {
                 //根据行业id、目录名和添加时间降序查询
-                hList = GetMainHtmlList(realmNameId);
+                hList = GetMainHtmlList();
                 if (hList == null || hList.Count < 1)
                     return json.WriteJson(0, "未获取到标题信息", new { });
             }
@@ -68,15 +68,21 @@ namespace fbkc
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <returns></returns>
-        public List<htmlInfo> GetMainHtmlList(string sqlstr)
+        public List<htmlInfo> GetMainHtmlList()
         {
             List<htmlInfo> hList = new List<htmlInfo>();
-            DataTable dt = SqlHelper.ExecuteDataSet(@"select title,titleImg,titleURL,addTime,columnId,columnName,realmNameId from 
+            //            DataTable dt = SqlHelper.ExecuteDataSet(@"select title,titleImg,titleURL,addTime,columnId,columnName from 
+            //( select 
+            //RANK()OVER(PARTITION BY columnInfo.Id ORDER BY htmlInfo.addTime DESC) AS
+            //RANK2, title,titleImg,titleURL,addTime,htmlInfo.columnId,columnName from 
+            //htmlInfo left join columnInfo On htmlInfo.columnId = columnInfo.Id) T
+            //where RANK2<=10 ").Tables[0];
+            DataTable dt = SqlHelper.ExecuteDataSet(@"select  title,titleURL,titleImg,addTime,columnId from 
 ( select 
-RANK()OVER(PARTITION BY columnInfo.Id ORDER BY htmlInfo.addTime DESC) AS
-RANK2, title,titleImg,titleURL,addTime,htmlInfo.columnId,columnName,realmNameId from 
-htmlInfo left join columnInfo On htmlInfo.columnId = columnInfo.Id) T
-where RANK2<=10 and realmNameId='" + sqlstr + "'").Tables[0];
+RANK()OVER(PARTITION BY columnId ORDER BY addTime DESC) AS
+RANK2, title,titleImg,titleURL,addTime,columnId from 
+htmlInfo ) T
+where RANK2<=10").Tables[0];
             if (dt.Rows.Count < 1)
                 return null;
             foreach (DataRow row in dt.Rows)
@@ -87,7 +93,7 @@ where RANK2<=10 and realmNameId='" + sqlstr + "'").Tables[0];
                 hInfo.titleURL = (string)row["titleURL"];
                 hInfo.columnId = (string)row["columnId"];//栏目Id
                 hInfo.addTime = row["addTime"].ToString();
-                hInfo.realmNameId = (string)row["realmNameId"];//目录名
+                //hInfo.realmNameId = (string)row["realmNameId"];//目录名
                 hList.Add(hInfo);
             }
             return hList;
@@ -99,7 +105,7 @@ where RANK2<=10 and realmNameId='" + sqlstr + "'").Tables[0];
         /// <returns></returns>
         public string GetCIdHtmlInfo(HttpContext context)
         {
-            string realmNameId = "1";//目录名
+            //string realmNameId = "1";//目录名
             string columnId = context.Request["columnId"];//行业id
             string pageIndex = context.Request["page"];
             string pageSize = context.Request["pageSize"];
@@ -111,7 +117,7 @@ where RANK2<=10 and realmNameId='" + sqlstr + "'").Tables[0];
             try
             {
                 //根据行业id、目录名和添加时间降序查询
-                hList = GetHtmlList(string.Format("where h.userId=u.Id and h.columnId='{0}' and h.realmNameId='{1}' order by h.addTime desc", columnId, realmNameId));
+                hList = GetHtmlList(string.Format("where columnId='{0}' order by addTime desc", columnId));
                 if (hList == null || hList.Count < 1)
                     return json.WriteJson(0, "未获取到标题信息", new { });
             }
@@ -133,7 +139,7 @@ where RANK2<=10 and realmNameId='" + sqlstr + "'").Tables[0];
         public List<htmlInfo> GetHtmlList(string sqlstr)
         {
             List<htmlInfo> hList = new List<htmlInfo>();
-            DataTable dt = SqlHelper.ExecuteDataSet("select * from htmlInfo as h,userInfo as u " + sqlstr).Tables[0];
+            DataTable dt = SqlHelper.ExecuteDataSet("select * from htmlInfo " + sqlstr).Tables[0];
             if (dt.Rows.Count < 1)
                 return null;
             foreach (DataRow row in dt.Rows)
@@ -158,7 +164,6 @@ where RANK2<=10 and realmNameId='" + sqlstr + "'").Tables[0];
 
                 hInfo.companyName = (string)row["companyName"];//公司名字
                 hInfo.ten_qq = (string)row["ten_qq"];
-                hInfo.companyName = (string)row["companyName"];
                 hList.Add(hInfo);
             }
             return hList;

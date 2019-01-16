@@ -40,6 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lhc工作\Jsondll\Bin\net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,17 +73,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fbg.html" />
-    <Content Include="HtmlPage1.html" />
+    <Content Include="DetailPage.html" />
+    <Content Include="PostService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL.cs" />
     <Compile Include="cmUserInfo.cs" />
     <Compile Include="htmlInfo.cs" />
+    <Compile Include="htmlInfos.cs" />
     <Compile Include="json.cs" />
     <Compile Include="MainHandler.ashx.cs">
       <DependentUpon>MainHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="NetHelper.cs" />
+    <Compile Include="PostService.asmx.cs">
+      <DependentUpon>PostService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlHelper1.cs" />
     <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <PropertyGroup>
