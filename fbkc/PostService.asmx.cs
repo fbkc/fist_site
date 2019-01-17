@@ -26,7 +26,7 @@ namespace fbkc
     // [System.Web.Script.Services.ScriptService]
     public class PostService : System.Web.Services.WebService, IRequiresSessionState
     {
-        private static string host = "http://39.105.196.3:80/hyzx";
+        private static string host = "http://39.105.196.3:8173/hyzx";
         private static string uname = "";
         /// <summary>
         /// post接口
@@ -72,6 +72,9 @@ namespace fbkc
                 hPara.unit = jo["unit"].ToString();
                 hPara.city = jo["city"].ToString();
                 hPara.titleImg = jo["thumb"].ToString();
+                hPara.companyName = uInfo.companyName;
+                hPara.com_web = uInfo.com_web;
+                hPara.ten_qq = uInfo.ten_qq;
                 hPara.addTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 bll.AddHtml(hPara);//存入数据库
                 WriteFile(hPara, uInfo, username, showName);//写模板
@@ -103,7 +106,7 @@ namespace fbkc
         public static bool WriteFile(htmlPara hInfo, cmUserInfo uInfo, string username, string hName)
         {
             //文件输出目录
-            string path = HttpContext.Current.Server.MapPath("~/test/" + username + "/");
+            string path = HttpContext.Current.Server.MapPath("~/" + username + "/");
 
             // 读取模板文件
             string temp = HttpContext.Current.Server.MapPath("~/DetailPage.html");//模版文件

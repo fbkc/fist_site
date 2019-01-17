@@ -137,7 +137,7 @@ where RANK2<=10").Tables[0];
         /// <param name="info"></param>
         public void AddHtml(htmlPara info)
         {
-            int a = SqlHelperCatalog.ExecuteNonQuery(@"INSERT INTO [AutouSend].[dbo].[htmlPara]
+            int a = SqlHelperCatalog.ExecuteNonQuery(@"INSERT INTO htmlPara
          ([title]
            ,[titleURL]
            ,[articlecontent]
