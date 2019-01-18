@@ -64,8 +64,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="UrlRewriter">
+      <HintPath>..\..\UrlRewriter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="MainHandler.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Newtonsoft.Json.dll" />
@@ -73,9 +77,10 @@
     <Content Include="statics\images\logo.jpg" />
     <Content Include="statics\images\nopic.gif" />
     <Content Include="statics\images\search_but_1011.jpg" />
-    <Content Include="templates\list-2.html" />
-    <Content Include="templates\list-20.html" />
-    <Content Include="templates\MainPage.html" />
+    <Content Include="hyzx\list-21.html" />
+    <Content Include="hyzx\list-20.html" />
+    <Content Include="hyzx\list-22.html" />
+    <Content Include="hyzx\MainPage.html" />
     <Content Include="TestHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -88,11 +93,15 @@
     <Content Include="fbg.html" />
     <Content Include="DetailPage.html" />
     <Content Include="PostService.asmx" />
+    <Content Include="UrlRewriter.dll" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL.cs" />
     <Compile Include="cmUserInfo.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="htmlInfo.cs" />
     <Compile Include="htmlPara.cs" />
     <Compile Include="json.cs" />
@@ -105,6 +114,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReWriteUrl.cs" />
     <Compile Include="SqlHelperCatalog.cs" />
     <Compile Include="SqlHelper.cs" />
     <Compile Include="TestHandler.ashx.cs">
