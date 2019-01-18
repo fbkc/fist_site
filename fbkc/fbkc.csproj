@@ -40,9 +40,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lhc工作\Jsondll\Bin\net20\Newtonsoft.Json.dll</HintPath>
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NVelocity, Version=1.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\NVelocity.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -64,6 +68,15 @@
   <ItemGroup>
     <Content Include="MainHandler.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Newtonsoft.Json.dll" />
+    <Content Include="NVelocity.dll" />
+    <Content Include="statics\images\logo.jpg" />
+    <Content Include="statics\images\nopic.gif" />
+    <Content Include="statics\images\search_but_1011.jpg" />
+    <Content Include="templates\list-2.html" />
+    <Content Include="templates\list-20.html" />
+    <Content Include="templates\MainPage.html" />
+    <Content Include="TestHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -94,7 +107,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelperCatalog.cs" />
     <Compile Include="SqlHelper.cs" />
+    <Compile Include="TestHandler.ashx.cs">
+      <DependentUpon>TestHandler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

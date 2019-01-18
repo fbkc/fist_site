@@ -81,7 +81,7 @@ namespace fbkc
             try
             {
                 //根据行业id、目录名和添加时间降序查询
-                hList =bll.GetHtmlList(string.Format("where columnId='{0}' order by addTime desc", columnId));
+                hList =bll.GetHtmlList(string.Format("where columnId='{0}' order by addTime desc", columnId),"20");
                 if (hList == null || hList.Count < 1)
                     return json.WriteJson(0, "未获取到标题信息", new { });
             }

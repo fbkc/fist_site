@@ -63,10 +63,10 @@ namespace fbkc
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <returns></returns>
-        public List<htmlPara> GetHtmlList(string sqlstr)
+        public List<htmlPara> GetHtmlList(string sqlstr,string count)
         {
             List<htmlPara> hList = new List<htmlPara>();
-            DataTable dt = SqlHelperCatalog.ExecuteDataSet("select * from htmlPara " + sqlstr).Tables[0];
+            DataTable dt = SqlHelperCatalog.ExecuteDataSet("select top "+count+" * from htmlPara " + sqlstr).Tables[0];
             if (dt.Rows.Count < 1)
                 return null;
             foreach (DataRow row in dt.Rows)
@@ -86,9 +86,9 @@ namespace fbkc
                 hPara.articlecontent = content;//产品简介
                 hPara.city = (string)row["city"];//生产城市
                 hPara.smallCount = (string)row["smallCount"];//起订
-                hPara.companyName = (string)row["companyName"];//公司名字
-                hPara.ten_qq = (string)row["ten_qq"];
-                hPara.com_web = (string)row["com_web"];//网址
+                hPara.companyName = (string)SqlHelper.FromDBNull(row["companyName"]);//公司名字
+                hPara.ten_qq = (string)SqlHelper.FromDBNull(row["ten_qq"]);
+                hPara.com_web = (string)SqlHelper.FromDBNull(row["com_web"]);//网址
                 hPara.addTime = row["addTime"].ToString();
                 hList.Add(hPara);
             }
