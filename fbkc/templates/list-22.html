@@ -1,0 +1,82 @@
+﻿#parse("head.html")
+<div class="swdh">
+    当前位置：<a href="http://www.cnhbw.net/qynews/">首页</a> >
+    <a href="http://www.cnhbw.net/qynews/list-2.html">新闻栏目</a>
+</div>
+#parse("navigation.html")
+<div class="swnr" style="margin-top: 10px;">
+    <style type="text/css">
+        .bk15 {
+            clear: both;
+            font-size: 1px;
+            height: 0;
+            line-height: 1px
+        }
+
+        .listd {
+            float: left;
+            width: 596px;
+            height: 625px;
+            padding-left: 3px;
+        }
+
+            .listd h5 {
+                color: #1e50a2;
+                width: 560px;
+                height: 26px;
+                margin: 10px 0;
+                font-size: 14px;
+                line-height: 26px;
+                padding-left: 10px;
+                border-bottom: 1px solid #dce7f3;
+                position: relative
+            }
+
+            .listd li span {
+                float: right;
+            }
+
+            .listd a.more {
+                font-size: 12px;
+                font-family: "宋体";
+                margin-right: 8px;
+                font-weight: normal;
+                color: #666;
+                position: absolute;
+                top: 0;
+                *top: 1px;
+                _top: 1px;
+                right: 0
+            }
+
+        .listv li {
+            color: #666;
+            font-size: 14px;
+            height: 26px;
+            line-height: 26px;
+            overflow: hidden;
+            width: 550px;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+    </style>
+    <div class="listd">
+        <h5 class="title-1">最新新闻<a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-20" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.newsTitle)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a><span>$h.addTime</span></li>
+            #end
+        </ul>
+    </div>
+    <!--<div class="listd">
+        <h5 class="title-1">最新新闻<a href="http://www.cnhbw.net/qynews/list-32.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $newsTitle)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a><span>$h.addTime</span></li>
+            #end
+        </ul>
+    </div>-->
+</div>
+    #parse("foot.html")

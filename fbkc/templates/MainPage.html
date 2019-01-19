@@ -3,16 +3,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <title>$hostName</title>
-    <meta name="keywords" content="$hostName" />
-    <meta name="description" content="$hostName" />
+    <title>$data.htmlTitle</title>
+    <meta name="keywords" content="$data.hostName" />
+    <meta name="description" content="$data.hostName" />
     <meta name="applicable-device" content="pc,mobile" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <link rel="icon" href="http://www.cnhbw.net/qynews/favicon.ico" />
     <link href="http://www.cnhbw.net/qynews/statics/css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/public/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/js/base64.min.js"></script>
-    <script type="text/javascript">var Tool = { 'host': 'http://www.cnhbw.net/qynews/', 'logged': false }; function InfoHeadSearch() { }</script>
+    <script type="text/javascript">var Tool = { 'host': '$data.hostUrl', 'logged': false }; function InfoHeadSearch() { }</script>
 </head>
 <body>
     <div class="banner">
@@ -54,35 +54,7 @@
         </div>
         <div class="clear" id="site_title"></div>
     </div>
-    <div class="layout998 mgb10 clearfix bdd1 result-select" id="Condition">
-        <dl class="clearfix last">
-            <dt>相关栏目：</dt>
-            <dd>
-                <ul id="ClassUL">
-                    <li style=""><a href="list-20.html" target="_blank">行业新闻</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-1.html" target="_blank">机械模具</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-2.html" target="_blank">化工材料</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-3.html" target="_blank">通信产品</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-4.html" target="_blank">工具量具</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-5.html" target="_blank">五金电工</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-6.html" target="_blank">皮革纺织</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-7.html" target="_blank">印刷包装</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-8.html" target="_blank">汽车保养</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-9.html" target="_blank">矿山能源</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-10.html" target="_blank">建筑建材</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-11.html" target="_blank">农机配件</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-12.html" target="_blank">食品饮料</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-13.html" target="_blank">养殖种植</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-14.html" target="_blank">文教数码</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-15.html" target="_blank">办公日用</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-16.html" target="_blank">运动休闲</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-17.html" target="_blank">二手回收</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-18.html" target="_blank">物流维修</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-19.html" target="_blank">商业服务</a></li>
-                </ul>
-            </dd>
-        </dl>
-    </div>
+    #include("navigation.html")
     <link href="http://www.cnhbw.net/qynews/statics/css/slide.css" rel="stylesheet" type="text/css" />
     <script src="http://www.cnhbw.net/qynews/statics/js/responsiveslides.min.js"></script>
     <script src="http://www.cnhbw.net/qynews/statics/js/slide.js"></script>
@@ -103,7 +75,7 @@
             <div class="swhuandeng" style="height:205px;margin-top: 3px;">
                 <div class="slide_container">
                     <ul class="rslides" id="slider">
-                        #foreach($h in $lunboTitle)
+                        #foreach($h in $data.lunboTitle)
                         <li>
                             <a href="$h.titleURL" target="_blank">
                                 <img src="$h.titleImg" onerror="this.src = '../statics/images/nopic.gif'" />
@@ -116,7 +88,7 @@
             </div>
             <div class="swtuijian-r" style="margin-top: 10px;">
                 <ul>
-                    #foreach($h in $tuijianTitle)
+                    #foreach($h in $data.tuijianTitle)
                     <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
                     #end
                 </ul>
@@ -130,7 +102,7 @@
             </div>
             <div class="list1-e">
                 <ul>
-                    #foreach($h in $productTitle)
+                    #foreach($h in $data.productTitle)
                     <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
                     #end
                 </ul>
@@ -143,17 +115,18 @@
             </div>
             <div class="list1-e">
                 <ul>
-                    #foreach($h in $newsTitle)
+                    #foreach($h in $data.newsTitle)
                     <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
                     #end
                 </ul>
-                <div class="listmore"><a href="http://www.cnhbw.net/qynews/list-22.html" target="_blank">更多新闻</a></div>
+                <div class="listmore"><a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-22" target="_blank">更多新闻</a></div>
             </div>
         </div>
     </div>
     <script src="http://www.cnhbw.net/qynews/statics/js/gundong.js"></script>
     <div class="four">
-        <div id="scroll"><!--底部滚动企业主站-->
+        <div id="scroll">
+            <!--底部滚动企业主站-->
             <div id="ScrollMe" style="overflow: hidden; height: 27px">
                 <a href="http://www.cnhbw.net/qynews/user-zzxyky729.html" target="_blank">郑州祥云快运有限公司</a>
                 <a href="http://www.cnhbw.net/qynews/user-zzrz1699.html" target="_blank">广州鸿标信息科技有限公司</a>
@@ -178,7 +151,7 @@
             </div>
         </div>
         <SCRIPT>
-            new srcMarquee("ScrollMe",0,1,808,27,30,3000,3000,27)
+            new srcMarquee("ScrollMe", 0, 1, 808, 27, 30, 3000, 3000, 27)
         </SCRIPT>
     </div>
     <div class="soewl9"></div>

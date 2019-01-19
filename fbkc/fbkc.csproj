@@ -77,10 +77,14 @@
     <Content Include="statics\images\logo.jpg" />
     <Content Include="statics\images\nopic.gif" />
     <Content Include="statics\images\search_but_1011.jpg" />
-    <Content Include="hyzx\list-21.html" />
-    <Content Include="hyzx\list-20.html" />
-    <Content Include="hyzx\list-22.html" />
-    <Content Include="hyzx\MainPage.html" />
+    <Content Include="templates\foot.html" />
+    <Content Include="templates\head.html" />
+    <Content Include="templates\list-1.html" />
+    <Content Include="templates\list-21.html" />
+    <Content Include="templates\list-20.html" />
+    <Content Include="templates\list-22.html" />
+    <Content Include="templates\MainPage.html" />
+    <Content Include="templates\navigation.html" />
     <Content Include="TestHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

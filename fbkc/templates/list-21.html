@@ -1,0 +1,221 @@
+﻿#parse("head.html")
+<div class="swdh">
+    当前位置：<a href="http://www.cnhbw.net/qynews/">首页</a> >
+    <a href="http://www.cnhbw.net/qynews/list-2.html">产品栏目</a>
+</div>
+#parse("navigation.html")
+<div class="swnr" style="margin-top: 10px;">
+    <style type="text/css">
+        .bk15 {
+            clear: both;
+            font-size: 1px;
+            height: 0;
+            line-height: 1px
+        }
+
+        .listd {
+            float: left;
+            width: 396px;
+            height: 310px;
+            padding-left: 3px;
+        }
+
+            .listd h5 {
+                color: #1e50a2;
+                width: 379px;
+                height: 26px;
+                margin: 10px 0;
+                font-size: 14px;
+                line-height: 26px;
+                padding-left: 10px;
+                border-bottom: 1px solid #dce7f3;
+                position: relative
+            }
+
+            .listd a.more {
+                font-size: 12px;
+                font-family: "宋体";
+                margin-right: 8px;
+                font-weight: normal;
+                position: absolute;
+                top: 0;
+                *top: 1px;
+                _top: 1px;
+                right: 0
+            }
+
+        .listv li {
+            color: #666;
+            font-size: 14px;
+            height: 26px;
+            line-height: 26px;
+            overflow: hidden;
+            width: 385px;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+    </style>
+    <div class="listd" id="l11">
+        <h5 class="title-1">机械模具<a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-1" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c1Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l12">
+        <h5 class="title-1">化工材料<a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-2" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c2Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l14">
+        <h5 class="title-1">通信产品<a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-3" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c3Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l15">
+        <h5 class="title-1">五金电工<a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-5" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c5Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l16">
+        <h5 class="title-1">皮革纺织<a href="http://www.cnhbw.net/qynews/list-16.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c6Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l17">
+        <h5 class="title-1">印刷包装<a href="http://www.cnhbw.net/qynews/list-17.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c7Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l18">
+        <h5 class="title-1">汽车保养<a href="http://www.cnhbw.net/qynews/list-18.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c8Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l19">
+        <h5 class="title-1">矿山能源<a href="http://www.cnhbw.net/qynews/list-19.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c9Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l20">
+        <h5 class="title-1">建筑建材<a href="http://www.cnhbw.net/qynews/list-20.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c10Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l21">
+        <h5 class="title-1">农机配件<a href="http://www.cnhbw.net/qynews/list-21.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c11Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l22">
+        <h5 class="title-1">食品饮料<a href="http://www.cnhbw.net/qynews/list-22.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c12Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l23">
+        <h5 class="title-1">养殖种植<a href="http://www.cnhbw.net/qynews/list-23.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c13Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l24">
+        <h5 class="title-1">文教数码<a href="http://www.cnhbw.net/qynews/list-24.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c14Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l25">
+        <h5 class="title-1">办公日用<a href="http://www.cnhbw.net/qynews/list-25.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c15Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l26">
+        <h5 class="title-1">运动休闲<a href="http://www.cnhbw.net/qynews/list-26.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c16Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l28">
+        <h5 class="title-1">二手回收<a href="http://www.cnhbw.net/qynews/list-28.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c17Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l29">
+        <h5 class="title-1">物流维修<a href="http://www.cnhbw.net/qynews/list-29.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c18Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+    <div class="listd" id="l30">
+        <h5 class="title-1">商业服务<a href="http://www.cnhbw.net/qynews/list-30.html" class="more">更多>></a></h5>
+        <div class="bk15"></div>
+        <ul class="listv">
+            #foreach($h in $data.c19Title)
+            <li><a href="$h.titleURL" target="_blank">$h.title</a></li>
+            #end
+        </ul>
+    </div>
+</div>
+    #parse("foot.html")

@@ -1,0 +1,145 @@
+﻿#parse("head.html")
+<script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/js/jquery.lazyload.js"></script>
+<style type="text/css">
+    .swnlist-t {
+        font-size: 18px;
+    }
+
+    .bdd2 {
+        width: 798px;
+        margin-top: 0px;
+        border-left: 1px solid #ddecf8;
+        border-right: 1px solid #ddecf8;
+        padding: 5px 10px;
+    }
+
+    .swnlist {
+        line-height: 180%;
+        height: 130px;
+        border-bottom: 1px dotted #F0F0F0;
+    }
+
+        .swnlist a {
+            color: #333;
+        }
+
+    .px14 {
+        font-size: 14px;
+    }
+
+    .f_gray {
+        color: #666666;
+    }
+
+    .f_red {
+        color: red;
+    }
+
+    .f_price {
+        font-weight: bold;
+        font-family: Arial;
+        color: #FF0000;
+    }
+
+    .px11 {
+        font-size: 11px;
+    }
+
+    .shadow {
+        width: 360px;
+        background: #F0F0F0;
+        padding-bottom: 10px;
+    }
+</style>
+<div class="swdh">
+    当前位置：<a href="http://www.cnhbw.net/qynews/">首页</a> >
+    <a href="http://www.cnhbw.net/qynews/list-2.html">产品栏目</a> >
+    <a href="http://www.cnhbw.net/qynews/list-12.html">机械模具</a> >
+</div>
+    #parse("navigation.html")
+<div class="swnr">
+    <div class="swnr-l main">
+        <div class="result-list-top bdd1">
+            <div class="result-list-tl">
+                <h4 class="fl">机械模具</h4>
+            </div>
+        </div>
+        #foreach($p in $data.productList)
+        <div class="swnlist bdd2">
+            <table>
+                <tr align="center">
+                    <td width="90">
+                        <div>
+                            <a href="$p.titleURL" target="_blank">
+                                <img src="$p.titleImg" class="lazy" width="80" height="80" alt="$p.title" onerror="this.src='../statics/images/nopic.gif'">
+                            </a>
+                        </div>
+                    </td>
+                    <td width="10"></td>
+                    <td align="left">
+                        <ul>
+                            <li>
+                                <a href="$p.titleURL" target="_blank"><strong class="px14">$p.title</strong></a>
+                            </li>
+                            <li class="f_gray">$p.articlecontent</li>
+                            <li><span class="fr px11">$p.addTime&nbsp;&nbsp;</span>[$p.city]&nbsp;&nbsp;&nbsp;<font color="red">$p.smallCount</font>&nbsp;起订</li>
+                            <li>
+                                <span class="fr f_gray">
+                                    <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=&gt;308896872&amp;site=qq&amp;menu=yes" target="_blank" rel="nofollow">
+                                        <img src="http://www.cnhbw.net/qynews/statics/images/qq.gif" title="点击QQ交谈/留言" alt="" align="absmiddle" original="http://www.cnhbw.net/qynews/statics/images/qq.gif">
+                                    </a>&nbsp;
+                                </span>
+                                <a href="$p.com_web" target="_blank">$p.companyName</a>&nbsp; <span class="f_gray"></span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        #end
+        <div id="InnerPage" style="border: 1px solid #ddecf8;border-top:none;padding: 5px 10px;">
+            <div id="PagerBox">
+                <div id="pages" class="text-c">
+                    <a class="num">30000条</a>
+                    <a href="list-12.html" class="previous"><b><i>上一页</i></b></a>
+                    <a href="javascript:void(0)" class="cur"><b><i>1</i></b></a>
+                    <a href="list-12-2.html"><b><i>2</i></b></a>
+                    <a href="list-12-3.html"><b><i>3</i></b></a>
+                    <a href="list-12-4.html"><b><i>4</i></b></a>
+                    <a href="list-12-5.html"><b><i>5</i></b></a> ..
+                    <a href="list-12-3000.html"><b><i>3000</i></b></a>
+                    <a href="list-12-2.html" class="nextpage"><b><i>下一页</i></b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swnr-r">
+        <div class="fixed">
+            <div class="col-wrap">
+                <h3>最新新闻</h3>
+                <ul class="iconBox">
+                    #foreach($n in $data.newsList)
+                    <li><a href="$n.titleURL" title="$n.title" target="_blank">$n.title</a></li>
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () { $("img").lazyload({ placeholder: "http://www.cnhbw.net/qynews/statics/images/nopic.gif", effect: "fadeIn" }); });
+    $(document).ready(function (e) {
+        t = $('.fixed').offset().top;
+        mh = $('.main').height(); fh = $('.fixed').height();
+        $(window).scroll(function (e) {
+            s = $(document).scrollTop();
+            if (s > t - 10) {
+                $('.fixed').css('position', 'fixed'); $('.fixed').addClass('shadow');
+                if (s + fh > mh) { $('.fixed').css('top', mh - s - fh + 'px'); }
+                else { $('.fixed').css('top', '0px'); }
+            }
+            else { $('.fixed').removeClass('shadow'); $('.fixed').css('position', ''); }
+        })
+    });
+</script>
+#parse("foot.html")

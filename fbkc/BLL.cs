@@ -79,22 +79,31 @@ namespace fbkc
                 hPara.titleURL = (string)row["titleURL"];
                 hPara.columnId = (string)row["columnId"];//栏目Id
                 string content = (string)row["articlecontent"];
-                if (content.Length > 60)
-                    content = "<p>" + content.Substring(0, 60) + "...</p>";
-                else
-                    content = "<p>" + content.Substring(0, content.Length) + "...</p>";
-                hPara.articlecontent = content;//产品简介
+                //if (content.Length > 60)
+                //    content = "<p>" + content.Substring(0, 60) + "...</p>";
+                //else
+                //    content = "<p>" + content.Substring(0, content.Length) + "...</p>";
+                hPara.articlecontent = ReplaceHtmlTag(content,60);//产品简介
                 hPara.city = (string)row["city"];//生产城市
                 hPara.smallCount = (string)row["smallCount"];//起订
                 hPara.companyName = (string)SqlHelper.FromDBNull(row["companyName"]);//公司名字
                 hPara.ten_qq = (string)SqlHelper.FromDBNull(row["ten_qq"]);
                 hPara.com_web = (string)SqlHelper.FromDBNull(row["com_web"]);//网址
-                hPara.addTime = row["addTime"].ToString();
+                hPara.addTime = ((DateTime)row["addTime"]).ToString("yyyy-MM-dd");
                 hList.Add(hPara);
             }
             return hList;
         }
+        public static string ReplaceHtmlTag(string html, int length)
+        {
+            string strText = System.Text.RegularExpressions.Regex.Replace(html, "<[^>]+>", "");
+            strText = System.Text.RegularExpressions.Regex.Replace(strText, "&[^;]+;", "");
 
+            if (length > 0 && strText.Length > length)
+                return strText.Substring(0, length);
+
+            return strText;
+        }
         /// <summary>
         /// 获取目录主页内容
         /// </summary>
