@@ -1,343 +1,102 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <title>行业新闻</title>
-    <meta name="keywords" content="$hostName">
-    <meta name="description" content="$hostName">
-    <meta name="applicable-device" content="pc,mobile" />
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <link rel="icon" href="http://www.cnhbw.net/qynews/favicon.ico" />
-    <link href="http://www.cnhbw.net/qynews/statics/css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/public/jquery.min.js"></script>
-    <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/js/base64.min.js"></script>
-    <script type="text/javascript">var Tool = { 'host': 'http://www.cnhbw.net/qynews/', 'Catid': '33', 'logged': false }; function InfoHeadSearch() { }</script>
-</head>
-<body>
-    <div class="banner">
-        <div class="logo" id="logo">
-            <img src="../statics/images/logo.jpg" width="230" height="60">
+﻿#parse("head.html")
+<style type="text/css">
+    li {
+        list-style: none;
+    }
+
+    .swnlist {
+        height: auto;
+        overflow: hidden;
+        padding-top: 10px;
+        border-bottom: 1px dotted #666;
+    }
+
+    .swnlist-t {
+        font-size: 18px;
+    }
+
+        .swnlist-t span {
+            float: right;
+            text-align: right;
+            color: #999;
+            line-height: 25px;
+            font-size: 14px;
+        }
+
+    .swnlist p {
+        color: #666;
+        line-height: 26px;
+    }
+
+    .swnlist:hover {
+        background: #f0faff;
+    }
+
+    .shadow {
+        width: 280px;
+        background: #F0F0F0;
+        padding-bottom: 10px;
+    }
+</style>
+<div class="swdh">
+    当前位置：<a href="http://39.105.196.3:8173/TestHandler.ashx?action=mainpage">首页</a>
+    <a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-20">行业新闻</a>
+</div>
+#parse("navigation.html")
+<div class="swnr">
+    <div class="swnr-l main">
+        <div class="bdd1 mgb10">
+            <div class="result-list-tl">
+                <h4 class="fl">行业新闻</h4>
+            </div>
         </div>
-        <div class="search">
-            <div id="page">
-                <div id="container" class="content clearfix">
-                    <div class="box-css clearfix">
-                        <div class="searchbg"></div>
-                        <div class="searchcontainer">
-                            <div class="searchselect">
-                                <span id="type" typeid="1">新闻</span>
-                                <a class="searchselectbtn" id="searchSelected" href="javascript:;"></a>
-                                <ul id="selectTypeList">
-                                    <li typeid="1"><a class=current href="javascript:;">新闻</a></li>
-                                    <li typeid="2"><a class=current href="javascript:;">产品</a></li>
-                                    <li class="last"></li>
-                                </ul>
-                            </div><input id="q" class="ipt" type="text" name="q" autocomplete="off" onblur="if(this.value==''){this.value='请输入关键词';}else{};" onfocus="this.value='';" placeholder="请输入关键词" value="" onkeydown="if (event.keyCode == 13){InfoHeadSearch();}" /><input class="button" type="submit" style="background:url(http://www.cnhbw.net/qynews/statics/images/search_but_1011.jpg) no-repeat; width:70px;height:35px;cursor:pointer;border:none;margin:0px;" value="" onclick="javascript:InfoHeadSearch();">
-                        </div>
-                    </div>
+        #foreach($n in $data.newsList)
+        <div class="swnlist">
+            <div class="swnlist-t">
+                <a href="$n.titleURL" target="_blank">$n.title</a>
+                <span>$n.addTime</span>
+            </div>
+            <p>$n.articlecontent</p>
+        </div>
+        #end
+        <div id="InnerPage">
+            <div id="PagerBox">
+                <div id="pages" class="text-c">
+                    <a class="num">30000条</a>
+                    <a href="list-33.html" class="previous"><b><i>上一页</i></b></a>
+                    <a href="javascript:void(0)" class="cur"><b><i>1</i></b></a>
+                    <a href="list-33-2.html"><b><i>2</i></b></a>
+                    <a href="list-33-3.html"><b><i>3</i></b></a>
+                    <a href="list-33-4.html"><b><i>4</i></b></a>
+                    <a href="list-33-5.html"><b><i>5</i></b></a> ..
+                    <a href="list-33-1500.html"><b><i>1500</i></b></a>
+                    <a href="list-33-2.html" class="nextpage"><b><i>下一页</i></b></a>
                 </div>
             </div>
-            <div class="clear"></div>
-            <div class="xwrcs">
-                <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/js/date.js" charset="utf-8"></script>
-            </div>
         </div>
-        <div class="member">
-            <table width="80" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="72">
-                        <a target="_blank" href="http://www.cnhbw.net/qynews/login.html" rel="nofollow" id="login">会员登录</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="clear" id="site_title"></div>
     </div>
-    <style type="text/css">
-        li {
-            list-style: none;
-        }
-
-        .swnlist {
-            height: auto;
-            overflow: hidden;
-            padding-top: 10px;
-            border-bottom: 1px dotted #666;
-        }
-
-        .swnlist-t {
-            font-size: 18px;
-        }
-
-            .swnlist-t span {
-                float: right;
-                text-align: right;
-                color: #999;
-                line-height: 25px;
-                font-size: 14px;
-            }
-
-        .swnlist p {
-            color: #666;
-            line-height: 26px;
-        }
-
-        .swnlist:hover {
-            background: #f0faff;
-        }
-
-        .shadow {
-            width: 280px;
-            background: #F0F0F0;
-            padding-bottom: 10px;
-        }
-    </style>
-    <div class="swdh">
-        当前位置：<a href="http://www.cnhbw.net/qynews/">首页</a>
-        <a href="http://www.cnhbw.net/qynews/list-1.html">企业新闻</a>
-        <a href="http://www.cnhbw.net/qynews/list-33.html">行业新闻</a>
-    </div>
-    <div class="layout998 mgb10 clearfix bdd1 result-select" id="Condition">
-        <dl class="clearfix last">
-            <dt>相关类目：</dt>
-            <dd>
-                <ul id="ClassUL">
-                    <li style=""><a href="list-20.html">行业新闻</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-1.html">机械模具</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-2.html">化工材料</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-3.html">通信产品</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-4.html">工具量具</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-5.html">五金电工</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-6.html">皮革纺织</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-7.html">印刷包装</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-8.html">汽车保养</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-9.html">矿山能源</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-10.html">建筑建材</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-11.html">农机配件</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-12.html">食品饮料</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-13.html">养殖种植</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-14.html">文教数码</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-15.html">办公日用</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-16.html">运动休闲</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-17.html">二手回收</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-18.html">物流维修</a></li>
-                    <li style=""><a href="http://www.cnhbw.net/qynews/list-19.html">商业服务</a></li>
+    <div class="swnr-r">
+        <div class="fixed">
+            <div class="col-wrap">
+                <h3>最新产品</h3>
+                <ul class="iconBox">
+                    #foreach($p in $data.productList)
+                    <li><a href="$p.titleURL" title="$p.title" target="_blank">$p.title</a></li>
+                    #end
                 </ul>
-            </dd>
-        </dl>
-    </div>
-    <div class="swnr">
-        <div class="swnr-l main">
-            <div class="bdd1 mgb10">
-                <div class="result-list-tl">
-                    <h4 class="fl">行业新闻</h4>
-                </div>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/jinjitwl-33-1142816.html" target="_blank">武汉到临汾公司报价服务周到</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>武汉到临汾公司报价服务周到快递业以加盟为主的模式，使得快递总部了利润，而网点却面临巨大经营压力网点面临成本上涨的压力</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/xiwang2019-33-1142801.html" target="_blank">西湖区承重钢制拖链下降情况分析情况</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>西湖区承重钢制拖链下降情况分析情况新闻资讯，西湖区承重钢制拖链下降情况分析情况今日行情市场方面，当前市场商家出货意愿较浓，</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/show-33-1142798.html" target="_blank">四川成都电动手动一体式启闭闸门简介及用途水利水电工程</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>四川成都电动手动体式启闭闸门简介及用途水利水电工程寿命长闸板与导轨之间装有防锁死结构使密封面磨损非常小维修方便若经多年使</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/WQ3TPu/penghao-33-1142794.html" target="_blank">银川杉木拼板联系电话</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>银川杉木拼板联系电话山东省曹县鹏皓木制品厂是家专业生产木块，木板，木圆棍的企业，结合传统工艺和现代工艺，精心打造出造型美观，手感</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/rydwbyzl-33-1142791.html" target="_blank">咨询四川内江美人鱼精彩表演租赁哪里的</a>
-                    <span>2019-01-18</span>
-                </div><p>想要鱼缸的水质，出租海狮表演租赁海洋展好是定期的换水，同时要做好锦鲤疾病的预防工作那养锦鲤鱼缸的水怎么会有腥味?应该怎么</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/hengfajscl-33-1142789.html" target="_blank">GH系列环形钢管杆避雷针厂家联系电话质优价廉</a>
-                    <span>2019-01-18</span>
-                </div><p>GH系列环形钢管杆避雷针厂家联系电话质优价廉接闪器就是通常所说的quot;避雷针quot;，它通过引下线和接地装置与大地相连由于quot;尖端放电quot;效应，</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/liutao15964358887-33-1142787.html" target="_blank">青浦P91合金钢管厂家T91合金无缝管钢材供应</a>
-                    <span>2019-01-18</span>
-                </div><p>山东宝联衡钢材有限公司山东宝联衡钢材有限公司现货库存规格齐全价格优惠专业销售无缝钢管合金管材质A</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/fjhygczljc-33-1142786.html" target="_blank">莆田仙游县-酒店建筑鉴定检测加微信</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>莆田仙游县酒店建筑鉴定检测加微信我公司是经住建厅批准质量技术监督认证具有第三方公证地位的省级权威性建筑工程质量检测</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/gsjkj-33-1142785.html" target="_blank">欢迎-黑龙江喷漆房废气处理专用活性炭2019厂家新价格</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>欢迎黑龙江喷漆房废气处理专用活性炭厂家新价格随着温度的继续升高，吸附剂的吸附作用会减弱故即使有化学吸附存在，过高的温度</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/Yu3pQK/hnjuran-33-1142783.html" target="_blank">供应甲醇燃料灶具配件一键启动</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>河南炬燃新能源研发有限公司史创于是家实体性专业研发醇基燃料的研究中心，与我们合作不只是个简单的配方转让，合作是个我们为</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/zS7KvQ/xetwl-33-1142770.html" target="_blank">扬州到内丘船运代理公司价格合理</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>扬州到内丘船运代理公司价格合理佛山市玺尔泰物流有限公司海运作用1海洋货物运输是国际贸易运输的主要方式国际海洋货物运输虽然存在速度</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/jWqLXR/news-33-1142764.html" target="_blank">玉溪喜来蓝莓苗供应价格适应性广</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>玉溪喜来蓝莓苗供应价格适应性广泰安高新区核源苗木专业合作社的苗木可用于各种开发土地占地用荒山开发用数量多万株常年办理银</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/UiPU95/qhsclgs-33-1142757.html" target="_blank">齐齐哈尔板框氯化铝生产厂家专注生产</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>齐齐哈尔板框氯化铝生产厂家专注生产标准范围内的三氧化铝含量在～之间的聚合氯化铝多为土黄色到黄色淡黄色的固体粉状这些类型</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/fullrich-33-1142746.html" target="_blank">欢迎咨询盐都导热油行情分析</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>欢迎咨询盐都导热油行情分析少数民族文化在新媒体时代有着巨大潜力,它不仅包括少数民族图书出版民族服饰等内容的网上,也包括与民族生活</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/brjxych-33-1142731.html" target="_blank">西藏阿里地革吉钢筋笼制作自动缠绕</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>西藏阿里地革吉钢筋笼制作自动缠绕工作原理钢筋笼成型机主机是采用摩擦传动原理mdash;mdash;即钢筋笼平置于组动力托辊之间转动，小车载着线材平</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/VJWIQi/jxsmgsjl-33-1142728.html" target="_blank">京雄世贸港美不美售楼处京雄世贸港户型图</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>京雄世贸港美不美售楼处京雄世贸港户型图京雄世贸港项目优势1京雄世贸港位置优势京雄世贸港这个楼盘处于京白大街与北环路的交叉</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/oyausJ/shun66-33-1142720.html" target="_blank">重庆到汕尾长途搬迁搬厂搬家返程车返程货车</a><span>2019-01-18</span>
-                </div>
-                <p>重庆到汕尾长途搬迁搬厂搬家返程车返程货车所以说，现在智慧物流已经到了个新的历史起点此时，以解放J为代表的智能化重卡，不再只</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/EwPncT/zdkgjia-33-1142719.html" target="_blank">新闻-石家庄液压岩石劈裂机愚公斧批发市场</a><span>2019-01-18</span>
-                </div><p>新闻石家庄液压岩石劈裂机愚公斧批发市场愚公斧工程领域市政基础，城市建设中广泛使土石方开挖工程路桥，房屋地基钢筋混凝土拆除等</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/jpdwby-33-1142714.html" target="_blank">张家口涿鹿县海洋展主题布置出租</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>张家口涿鹿县海洋展主题布置出租张家口涿鹿县海洋展主题布置出租百鸟园租赁讲述鹦鹉的饲料搭配大家都知道鹦鹉学舌，</p>
-            </div>
-            <div class="swnlist">
-                <div class="swnlist-t">
-                    <a href="http://www.cnhbw.net/qynews/cHgv1o/shengjiejd-33-1142712.html" target="_blank">衡水阜城县200kw发电机出租多少钱一天</a>
-                    <span>2019-01-18</span>
-                </div>
-                <p>衡水阜城县kw发电机出租多少钱天柴油机在保护模块采用先进的嵌入式微处理器设计，专用于柴油机发电机组的故障保护，避免了因用户</p>
-            </div>
-            <div id="InnerPage">
-                <div id="PagerBox">
-                    <div id="pages" class="text-c">
-                        <a class="num">30000条</a>
-                        <a href="list-33.html" class="previous"><b><i>上一页</i></b></a>
-                        <a href="javascript:void(0)" class="cur"><b><i>1</i></b></a>
-                        <a href="list-33-2.html"><b><i>2</i></b></a>
-                        <a href="list-33-3.html"><b><i>3</i></b></a>
-                        <a href="list-33-4.html"><b><i>4</i></b></a>
-                        <a href="list-33-5.html"><b><i>5</i></b></a> ..
-                        <a href="list-33-1500.html"><b><i>1500</i></b></a>
-                        <a href="list-33-2.html" class="nextpage"><b><i>下一页</i></b></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="swnr-r">
-            <div class="fixed">
-                <div class="col-wrap">
-                    <h3>最新产品</h3>
-                    <ul class="iconBox">
-                        <li><a href="http://www.cnhbw.net/qynews/lbD5lq/news-11-3864075.html" title="江苏省坞门水下堵漏欢迎来电" target="_blank">·江苏省坞门水下堵漏欢迎来电</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/show-20-3864074.html" title="江西鹰潭HDPE缠绕增强管B型厂家直销" target="_blank">·江西鹰潭HDPE缠绕增强管B型厂家直销</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/I3W5XI/dekejc6-11-3864073.html" title="湖北黄冈宫野五轴机床高速防护板" target="_blank">·湖北黄冈宫野五轴机床高速防护板</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/4YwCm7/jinpeng888-11-3864072.html" title="宜宾珙县马戏团大型演出租赁" target="_blank">·宜宾珙县马戏团大型演出租赁</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/VnwcTH/xmtzyz-23-3864071.html" title="河北承德秘鲁羊驼多少钱一只欢迎您" target="_blank">·河北承德秘鲁羊驼多少钱一只欢迎您</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/oNFUTT/longstdwl-11-3864070.html" title="瓦房店到张家港货运公司" target="_blank">·瓦房店到张家港货运公司</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/ldhb-14-3864069.html" title="伊春小型新能源电动四轮1.7立方洒水车生产商欢迎合作" target="_blank">·伊春小型新能源电动四轮1.7立方洒水车生..</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/yijiajs-11-3864068.html" title="欢迎晋城PAC聚合氯化铝质优价廉" target="_blank">·欢迎晋城PAC聚合氯化铝质优价廉</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/4OaQNx/jinqiao157-11-3864067.html" title="安徽阜阳金枝国槐批发价格咨询种植基地" target="_blank">·安徽阜阳金枝国槐批发价格咨询种植基地</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/benbohb-29-3864066.html" title="长兴夹浦镇清理隔油池质优价廉" target="_blank">·长兴夹浦镇清理隔油池质优价廉</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/show-20-3864065.html" title="颍上环保塑胶跑道新型环保材料生产厂家" target="_blank">·颍上环保塑胶跑道新型环保材料生产厂家</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/ROisYh/yutongtf-12-3864064.html" title="无锡无动力风帽质量检测标准" target="_blank">·无锡无动力风帽质量检测标准</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/fpsljx-14-3864063.html" title="资阳简阳900mm拍门价格行业新闻" target="_blank">·资阳简阳900mm拍门价格行业新闻</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/MMxI7x/cheng4-23-3864062.html" title="献县养小龙虾怎么养殖小龙虾苗种虾销售" target="_blank">·献县养小龙虾怎么养殖小龙虾苗种虾销售</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/show-18-3864061.html" title="台湾泷泽LA-200G机床排屑机自动化生产为主" target="_blank">·台湾泷泽LA-200G机床排屑机自动化生产为主</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/cHgv1o/cdxyhbgs-30-3864060.html" title="供应游仙区排污管道疏通维护管理部" target="_blank">·供应游仙区排污管道疏通维护管理部</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/YaqHET/ylwl033-11-3864059.html" title="肉兔比利时兔吉林市龙潭区" target="_blank">·肉兔比利时兔吉林市龙潭区</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/9YCXUq/changle69-11-3864058.html" title="虹口区免熏蒸托盘诚信服务-发货速度快" target="_blank">·虹口区免熏蒸托盘诚信服务-发货速度快</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/yOsn4T/zhenhao152-11-3864057.html" title="大同孔雀价格最新行情-欢迎来电咨询" target="_blank">·大同孔雀价格最新行情-欢迎来电咨询</a></li>
-                        <li><a href="http://www.cnhbw.net/qynews/EviLrE/yuantong56-30-3864056.html" title="邯郸到丹东物流公司哪家更好" target="_blank">·邯郸到丹东物流公司哪家更好</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function (e) {
-            t = $('.fixed').offset().top; mh = $('.main').height(); fh = $('.fixed').height();
-            $(window).scroll(function (e) {
-                s = $(document).scrollTop(); if (s > t - 10) {
-                    $('.fixed').css('position', 'fixed'); $('.fixed').addClass('shadow');
-                    if (s + fh > mh) { $('.fixed').css('top', mh - s - fh + 'px'); } else { $('.fixed').css('top', '0px'); }
-                } else { $('.fixed').removeClass('shadow'); $('.fixed').css('position', ''); }
-            })
-        });</script>
-    <div style="width:1178px;margin: 0 auto;border: #C2D2DF 1px dotted !important;padding: 10px;background:#FCFCFC;" id="mianze" rel="nofollow"></div>
-    <script language=javascript src='http://vip.hsoow.com/?a=foot&name=&from=cnhbw' charset="utf-8"></script> <div class="footer">
-        <p>
-            Copyright © 2015-
-            <script type="text/javascript">var date = new Date; document.write(date.getFullYear());</script>&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.cnhbw.net/qynews/sitemaps.xml">百度地图</a>&nbsp;&nbsp;<a target="_blank" href="http://www.cnhbw.net/qynews/sitemap.html">网站地图</a>
-        </p>
-    </div>
-    <script>
-    (function () {
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') { bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; }
-            else { bp.src = 'http://push.zhanzhang.baidu.com/push.js'; }
-            var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(bp, s);
-        })();</script>
-</body>
-</html>
+</div>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        t = $('.fixed').offset().top; mh = $('.main').height(); fh = $('.fixed').height();
+        $(window).scroll(function (e) {
+            s = $(document).scrollTop(); if (s > t - 10) {
+                $('.fixed').css('position', 'fixed'); $('.fixed').addClass('shadow');
+                if (s + fh > mh) { $('.fixed').css('top', mh - s - fh + 'px'); } else { $('.fixed').css('top', '0px'); }
+            } else { $('.fixed').removeClass('shadow'); $('.fixed').css('position', ''); }
+        })
+    });
+</script>
+#parse("foot.html")

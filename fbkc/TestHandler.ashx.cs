@@ -33,7 +33,8 @@ namespace fbkc
                     switch (_strAction.Trim().ToLower())
                     {
                         case "mainpage": _strContent.Append(MainPage(context)); break;
-                        case "list-1": _strContent.Append(GetProduct(context, "1")); break;
+                        case "list-1": _strContent.Append(GetProduct(context, "1")); break;//产品列表
+                        case "list-20": _strContent.Append(GetNews(context, "20")); break;//新闻列表
                         case "list-21": _strContent.Append(MoreProduct(context)); break;//更多产品
                         case "list-22": _strContent.Append(MoreNews(context)); break;//更多新闻
                         default: break;
@@ -54,10 +55,10 @@ namespace fbkc
                 htmlTitle = hostName,
                 hostName,
                 hostUrl,
-                lunboTitle=GetNewsByCId("6", "20"),//轮播标题，推荐新闻
-                tuijianTitle=GetNoNewsByCId("12", "20"),//推荐产品
-                productTitle=GetNoNewsByCId("30", "20"),//最新产品，无分类
-                newsTitle = GetNewsByCId("30", "20")//最新新闻
+                lunboTitle = GetParaByCId("20", 1,6),//轮播标题，推荐新闻
+                tuijianTitle = GetNoNewsByCId("12", "20"),//推荐产品
+                productTitle = GetNoNewsByCId("30", "20"),//最新产品，无分类
+                newsTitle = GetParaByCId("20", 1,30)//最新新闻
             };
             return WriteTemplate(data, "MainPage.html");
         }
@@ -69,16 +70,30 @@ namespace fbkc
         /// <returns></returns>
         public string GetProduct(HttpContext context, string cId)
         {
+            int pageIndex = 1;
+            if (context.Request["pageIndex"] != null)
+            {
+                pageIndex = int.Parse(context.Request["pageIndex"]);
+            }
+            int pageTotal = bll.GetPageTotal(cId);//此行业总条数
+            int pageCount = (int)Math.Ceiling(pageTotal/20.0);//总页数（每页20条）
+            object[] pageData = new object[pageTotal];
+            for(int i=0;i< pageCount; i++)
+            {
+                pageData[i] = new { Href= "TestHandler.ashx?action=list-"+cId+"-"+(i+1),Title=i+1 };
+            }
             var data = new
             {
                 htmlTitle = "产品栏目",
                 hostName,
                 hostUrl,
                 cId,
-                productList = GetProductByCId("10", cId),
-                newsList = GetNewsByCId("20","20")
+                productList = GetParaByCId(cId,pageIndex,20),
+                pageData,
+                pageTotal,
+                newsList = GetParaByCId("20", 1,20)
             };
-            return WriteTemplate(data, "list-"+cId+".html");
+            return WriteTemplate(data, "list-" + cId + ".html");
         }
         /// <summary>
         /// 新闻列表页
@@ -88,13 +103,19 @@ namespace fbkc
         /// <returns></returns>
         public string GetNews(HttpContext context, string cId)
         {
+            int pageIndex = 1;
+            if(context.Request["pageIndex"]!=null)
+            {
+                pageIndex=int.Parse(context.Request["pageIndex"]);
+            }
             var data = new
             {
-                htmlTitle = "产品栏目",
+                htmlTitle = "新闻栏目",
                 hostName,
                 hostUrl,
                 cId,
-                productList = GetProductByCId("10", cId)
+                newsList = GetParaByCId("20", pageIndex, 20),
+                productList = GetNoNewsByCId("20", "20")
             };
             return WriteTemplate(data, "list-" + cId + ".html");
         }
@@ -112,25 +133,25 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
-                c1Title = GetProductByCId("10", "1"),
-                c2Title = GetProductByCId("10", "2"),
-                c3Title = GetProductByCId("10", "3"),
-                c4Title = GetProductByCId("10", "4"),//工具量具，不显示
-                c5Title = GetProductByCId("10", "5"),
-                c6Title = GetProductByCId("10", "6"),
-                c7Title = GetProductByCId("10", "7"),
-                c8Title = GetProductByCId("10", "8"),
-                c9Title = GetProductByCId("10", "9"),
-                c10Title = GetProductByCId("10", "10"),
-                c11Title = GetProductByCId("10", "11"),
-                c12Title = GetProductByCId("10", "12"),
-                c13Title = GetProductByCId("10", "13"),
-                c14Title = GetProductByCId("10", "14"),
-                c15Title = GetProductByCId("10", "15"),
-                c16Title = GetProductByCId("10", "16"),
-                c17Title = GetProductByCId("10", "17"),
-                c18Title = GetProductByCId("10", "18"),
-                c19Title = GetProductByCId("10", "19")
+                c1Title = GetParaByCId("1", 1,10),
+                c2Title = GetParaByCId("2", 1, 10),
+                c3Title = GetParaByCId("3", 1, 10),
+                c4Title = GetParaByCId("4", 1, 10),//工具量具，不显示
+                c5Title = GetParaByCId("5", 1, 10),
+                c6Title = GetParaByCId("6", 1, 10),
+                c7Title = GetParaByCId("7", 1, 10),
+                c8Title = GetParaByCId("8", 1, 10),
+                c9Title = GetParaByCId("9", 1, 10),
+                c10Title = GetParaByCId("10", 1, 10),
+                c11Title = GetParaByCId("11", 1, 10),
+                c12Title = GetParaByCId("12", 1, 10),
+                c13Title = GetParaByCId("13", 1, 10),
+                c14Title = GetParaByCId("14", 1, 10),
+                c15Title = GetParaByCId("15", 1, 10),
+                c16Title = GetParaByCId("16", 1, 10),
+                c17Title = GetParaByCId("17", 1, 10),
+                c18Title = GetParaByCId("18", 1, 10),
+                c19Title = GetParaByCId("19", 1, 10)
             };
             return WriteTemplate(data, "list-21.html");
         }
@@ -148,7 +169,7 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
-                newsTitle = GetNewsByCId("30", "20")
+                newsTitle = GetParaByCId("20", 1,30)
             };
             return WriteTemplate(data, "list-22.html");
         }
@@ -178,14 +199,15 @@ namespace fbkc
 
         private BLL bll = new BLL();
         /// <summary>
-        /// 获取最新新闻
+        /// 根据行业id获取最新产品
         /// </summary>
-        /// <param name="count">新闻条数</param>
-        /// <param name="columnId">行业id</param>
+        /// <param name="columnId">行业Id</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">每页条数</param>
         /// <returns></returns>
-        public List<htmlPara> GetNewsByCId(string count, string columnId)
+        public List<htmlPara> GetParaByCId(string columnId,int pageIndex,int pageSize )
         {
-            List<htmlPara> hList = bll.GetHtmlList(string.Format("where columnId='{0}' order by addTime desc", columnId), count);
+            List<htmlPara> hList = bll.GetHtmlList(columnId,pageIndex,pageSize);
             return hList;
         }
         /// <summary>
@@ -197,17 +219,6 @@ namespace fbkc
         public List<htmlPara> GetNoNewsByCId(string count, string columnId)
         {
             List<htmlPara> hList = bll.GetHtmlList(string.Format("where columnId!='{0}' order by addTime desc", columnId), count);
-            return hList;
-        }
-        /// <summary>
-        /// 根据行业id获取最新产品
-        /// </summary>
-        /// <param name="count"></param>
-        /// <param name="columnId"></param>
-        /// <returns></returns>
-        public List<htmlPara> GetProductByCId(string count, string columnId)
-        {
-            List<htmlPara> hList = bll.GetHtmlList(string.Format("where columnId ='{0}' order by addTime desc", columnId), count);
             return hList;
         }
         public bool IsReusable

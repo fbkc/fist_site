@@ -61,12 +61,20 @@ namespace fbkc
         /// <summary>
         /// 获取栏目页网页
         /// </summary>
-        /// <param name="sqlstr"></param>
+        /// <param name="columnId">行业类别</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">每页条数</param>
         /// <returns></returns>
-        public List<htmlPara> GetHtmlList(string sqlstr,string count)
+        public List<htmlPara> GetHtmlList(string columnId, int pageIndex, int pageSize)
         {
+            //分页查询
             List<htmlPara> hList = new List<htmlPara>();
-            DataTable dt = SqlHelperCatalog.ExecuteDataSet("select top "+count+" * from htmlPara " + sqlstr).Tables[0];
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select * from 
+                (select *, ROW_NUMBER() OVER(order by addTime desc) AS RowId from htmlPara where columnId='@columnId') as b
+                where b.RowId between @startNum and @endNum",
+               new SqlParameter("@columnId", columnId),
+               new SqlParameter("@startNum", (pageIndex - 1) * pageSize + 1),
+               new SqlParameter("@endNum", pageIndex * pageSize));
             if (dt.Rows.Count < 1)
                 return null;
             foreach (DataRow row in dt.Rows)
@@ -79,11 +87,44 @@ namespace fbkc
                 hPara.titleURL = (string)row["titleURL"];
                 hPara.columnId = (string)row["columnId"];//栏目Id
                 string content = (string)row["articlecontent"];
-                //if (content.Length > 60)
-                //    content = "<p>" + content.Substring(0, 60) + "...</p>";
-                //else
-                //    content = "<p>" + content.Substring(0, content.Length) + "...</p>";
-                hPara.articlecontent = ReplaceHtmlTag(content,60);//产品简介
+                hPara.articlecontent = ReplaceHtmlTag(content, 60);//产品简介
+                hPara.city = (string)row["city"];//生产城市
+                hPara.smallCount = (string)row["smallCount"];//起订
+                hPara.companyName = (string)SqlHelper.FromDBNull(row["companyName"]);//公司名字
+                hPara.ten_qq = (string)SqlHelper.FromDBNull(row["ten_qq"]);
+                hPara.com_web = (string)SqlHelper.FromDBNull(row["com_web"]);//网址
+                hPara.addTime = ((DateTime)row["addTime"]).ToString("yyyy-MM-dd");
+                hList.Add(hPara);
+            }
+            return hList;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columnId"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public List<htmlPara> GetHtmlList(string count,string columnId)
+        {
+            //分页查询
+            List<htmlPara> hList = new List<htmlPara>();
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select top @count * from htmlPara where columnId !=@columnId order by addTime desc",
+               new SqlParameter("@columnId", columnId),
+               new SqlParameter("@count", count));
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                htmlPara hPara = new htmlPara();
+                hPara.Id = (long)row["Id"];
+                hPara.userId = row["userId"].ToString();
+                hPara.title = (string)row["title"];
+                hPara.titleImg = (string)row["titleImg"];
+                hPara.titleURL = (string)row["titleURL"];
+                hPara.columnId = (string)row["columnId"];//栏目Id
+                string content = (string)row["articlecontent"];
+                hPara.articlecontent = ReplaceHtmlTag(content, 60);//产品简介
                 hPara.city = (string)row["city"];//生产城市
                 hPara.smallCount = (string)row["smallCount"];//起订
                 hPara.companyName = (string)SqlHelper.FromDBNull(row["companyName"]);//公司名字
@@ -219,6 +260,11 @@ where RANK2<=10").Tables[0];
         {
             object ob = SqlHelper.ExecuteScalar("select Id from userInfo where username='" + username + "'");
             return ob.ToString();
+        }
+        public int GetPageTotal(string columnId)
+        {
+            return (int)SqlHelperCatalog.ExecuteScalar("select count(*)  from htmlPara where columnId=@columnId",
+                new SqlParameter("@columnId", columnId));
         }
     }
 }

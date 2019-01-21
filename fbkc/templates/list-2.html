@@ -52,7 +52,7 @@
     }
 </style>
 <div class="swdh">
-    当前位置：<a href="http://39.105.196.3:8173/TestHandler.ashx?action=mainpage">首页</a> >
+    当前位置：<a href="http://www.cnhbw.net/qynews/">首页</a> >
     <a href="http://www.cnhbw.net/qynews/list-2.html">产品栏目</a> >
     <a href="http://www.cnhbw.net/qynews/list-12.html">机械模具</a> >
 </div>
@@ -61,7 +61,7 @@
     <div class="swnr-l main">
         <div class="result-list-top bdd1">
             <div class="result-list-tl">
-                <h4 class="fl">机械模具</h4>
+                <h4 class="fl">化工材料</h4>
             </div>
         </div>
         #foreach($p in $data.productList)
@@ -108,12 +108,14 @@
         <div id="InnerPage" style="border: 1px solid #ddecf8;border-top:none;padding: 5px 10px;">
             <div id="PagerBox">
                 <div id="pages" class="text-c">
-                    <a class="num">$data.pageTotal条</a>
+                    <a class="num">30000条</a>
                     <a href="list-12.html" class="previous"><b><i>上一页</i></b></a>
                     <a href="javascript:void(0)" class="cur"><b><i>1</i></b></a>
-                    #foreach($p in $data.pageData)
-                    <a href="$p.Href"><b><i>$p.Title</i></b></a>
-                    #end
+                    <a href="list-12-2.html"><b><i>2</i></b></a>
+                    <a href="list-12-3.html"><b><i>3</i></b></a>
+                    <a href="list-12-4.html"><b><i>4</i></b></a>
+                    <a href="list-12-5.html"><b><i>5</i></b></a> ..
+                    <a href="list-12-3000.html"><b><i>3000</i></b></a>
                     <a href="list-12-2.html" class="nextpage"><b><i>下一页</i></b></a>
                 </div>
             </div>
