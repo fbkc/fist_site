@@ -70,8 +70,7 @@ namespace fbkc
             //分页查询
             List<htmlPara> hList = new List<htmlPara>();
             DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select * from 
-                (select *, ROW_NUMBER() OVER(order by addTime desc) AS RowId from htmlPara where columnId='@columnId') as b
-                where b.RowId between @startNum and @endNum",
+                (select *, ROW_NUMBER() OVER(order by addTime desc) AS RowId from htmlPara where columnId=@columnId) as b where b.RowId between @startNum and @endNum",
                new SqlParameter("@columnId", columnId),
                new SqlParameter("@startNum", (pageIndex - 1) * pageSize + 1),
                new SqlParameter("@endNum", pageIndex * pageSize));
@@ -109,7 +108,7 @@ namespace fbkc
         {
             //分页查询
             List<htmlPara> hList = new List<htmlPara>();
-            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select top @count * from htmlPara where columnId !=@columnId order by addTime desc",
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select top (CONVERT(int,@count)) * from htmlPara where columnId !='@columnId' order by addTime desc",
                new SqlParameter("@columnId", columnId),
                new SqlParameter("@count", count));
             if (dt.Rows.Count < 1)

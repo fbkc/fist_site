@@ -52,9 +52,9 @@
     }
 </style>
 <div class="swdh">
-    当前位置：<a href="http://39.105.196.3:8173/TestHandler.ashx?action=mainpage">首页</a> >
-    <a href="http://www.cnhbw.net/qynews/list-2.html">产品栏目</a> >
-    <a href="http://www.cnhbw.net/qynews/list-12.html">机械模具</a> >
+    当前位置：<a href="TestHandler.ashx?action=mainpage">首页</a> >
+    <a href="TestHandler.ashx?action=">产品栏目</a> >
+    <a href="TestHandler.ashx?action=GetProduct&cId=1">机械模具</a> >
 </div>
     #parse("navigation.html")
 <div class="swnr">
@@ -108,13 +108,26 @@
         <div id="InnerPage" style="border: 1px solid #ddecf8;border-top:none;padding: 5px 10px;">
             <div id="PagerBox">
                 <div id="pages" class="text-c">
-                    <a class="num">$data.pageTotal条</a>
-                    <a href="list-12.html" class="previous"><b><i>上一页</i></b></a>
-                    <a href="javascript:void(0)" class="cur"><b><i>1</i></b></a>
-                    #foreach($p in $data.pageData)
-                    <a href="$p.Href"><b><i>$p.Title</i></b></a>
+                    <a class="num">共$data.paraTotal条</a>
+                    <!--第一页
+                    <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=1"></a>-->
+                    #if($data.pageIndex>1)
+                    #set($upPage=$data.pageIndex+(-1))
+                    <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$upPage" class="previous"><b><i>上一页</i></b></a>
                     #end
-                    <a href="list-12-2.html" class="nextpage"><b><i>下一页</i></b></a>
+
+                    #foreach($page in $data.pageData)
+                    #if($page.Title==$data.pageIndex)
+                    <a href="javascript:void(0)" class="cur"><b><i>$page.Title</i></b></a>
+                    #else
+                    <a href="$page.Href"><b><i>$page.Title</i></b></a>
+                    #end
+                    #end
+                    #if($data.pageIndex<$data.pageCount) #set($nextPage=$data.pageIndex+1)
+                    <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$nextPage" class="nextpage"><b><i>下一页</i></b></a>
+                    #end
+                    <!--最后一页
+                    <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$data.pageCount"></a>-->
                 </div>
             </div>
         </div>

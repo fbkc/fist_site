@@ -69,7 +69,7 @@ namespace fbkc
         /// <returns></returns>
         public string GetCIdHtmlInfo(HttpContext context)
         {
-            //string realmNameId = "1";//目录名
+            string realmNameId = "1";//目录名
             string columnId = context.Request["columnId"];//行业id
             string pageIndex = context.Request["page"];
             string pageSize = context.Request["pageSize"];
@@ -81,7 +81,8 @@ namespace fbkc
             try
             {
                 //根据行业id、目录名和添加时间降序查询
-                hList =bll.GetHtmlList(string.Format("where columnId='{0}' order by addTime desc", columnId),"20");
+                //hList = bll.GetHtmlList(string.Format("where columnId='{0}' order by addTime desc", columnId), "20");
+                hList = null;
                 if (hList == null || hList.Count < 1)
                     return json.WriteJson(0, "未获取到标题信息", new { });
             }

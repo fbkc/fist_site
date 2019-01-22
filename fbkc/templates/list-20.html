@@ -39,8 +39,8 @@
     }
 </style>
 <div class="swdh">
-    当前位置：<a href="http://39.105.196.3:8173/TestHandler.ashx?action=mainpage">首页</a>
-    <a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-20">行业新闻</a>
+    当前位置：<a href="TestHandler.ashx?action=mainpage">首页</a> >
+    <a href="TestHandler.ashx?action=GetNews">行业新闻</a>
 </div>
 #parse("navigation.html")
 <div class="swnr">
@@ -62,15 +62,22 @@
         <div id="InnerPage">
             <div id="PagerBox">
                 <div id="pages" class="text-c">
-                    <a class="num">30000条</a>
-                    <a href="list-33.html" class="previous"><b><i>上一页</i></b></a>
-                    <a href="javascript:void(0)" class="cur"><b><i>1</i></b></a>
-                    <a href="list-33-2.html"><b><i>2</i></b></a>
-                    <a href="list-33-3.html"><b><i>3</i></b></a>
-                    <a href="list-33-4.html"><b><i>4</i></b></a>
-                    <a href="list-33-5.html"><b><i>5</i></b></a> ..
-                    <a href="list-33-1500.html"><b><i>1500</i></b></a>
-                    <a href="list-33-2.html" class="nextpage"><b><i>下一页</i></b></a>
+                    <a class="num">共$data.paraTotal条</a>
+                    #if($data.pageIndex>1)
+                    #set($upPage=$data.pageIndex+(-1))
+                    <a href="TestHandler.ashx?action=GetNews&cId=$data.cId&pageIndex=$upPage" class="previous"><b><i>上一页</i></b></a>
+                    #end
+
+                    #foreach($page in $data.pageData)
+                    #if($page.Title==$data.pageIndex)
+                    <a href="javascript:void(0)" class="cur"><b><i>$page.Title</i></b></a>
+                    #else
+                    <a href="$page.Href"><b><i>$page.Title</i></b></a>
+                    #end
+                    #end
+                    #if($data.pageIndex<$data.pageCount) #set($nextPage=$data.pageIndex+1)
+                    <a href="TestHandler.ashx?action=GetNews&cId=$data.cId&pageIndex=$nextPage" class="nextpage"><b><i>下一页</i></b></a>
+                    #end
                 </div>
             </div>
         </div>

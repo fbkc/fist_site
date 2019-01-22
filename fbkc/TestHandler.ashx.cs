@@ -30,11 +30,11 @@ namespace fbkc
                 }
                 else
                 {
-                    switch (_strAction.Trim().ToLower())
+                    switch (_strAction.Trim())
                     {
                         case "mainpage": _strContent.Append(MainPage(context)); break;
-                        case "list-1": _strContent.Append(GetProduct(context, "1")); break;//产品列表
-                        case "list-20": _strContent.Append(GetNews(context, "20")); break;//新闻列表
+                        case "GetProduct": _strContent.Append(GetProduct(context, "1")); break;//产品列表
+                        case "GetNews": _strContent.Append(GetNews(context, "20")); break;//新闻列表
                         case "list-21": _strContent.Append(MoreProduct(context)); break;//更多产品
                         case "list-22": _strContent.Append(MoreNews(context)); break;//更多新闻
                         default: break;
@@ -73,14 +73,21 @@ namespace fbkc
             int pageIndex = 1;
             if (context.Request["pageIndex"] != null)
             {
-                pageIndex = int.Parse(context.Request["pageIndex"]);
+                try
+                {
+                    pageIndex = int.Parse(context.Request["pageIndex"]);
+                }
+                catch
+                {
+
+                }
             }
-            int pageTotal = bll.GetPageTotal(cId);//此行业总条数
-            int pageCount = (int)Math.Ceiling(pageTotal/20.0);//总页数（每页20条）
-            object[] pageData = new object[pageTotal];
+            int paraTotal = bll.GetPageTotal(cId);//此行业总条数
+            int pageCount = (int)Math.Ceiling(paraTotal / 20.0);//总页数（每页20条）
+            object[] pageData = new object[pageCount];
             for(int i=0;i< pageCount; i++)
             {
-                pageData[i] = new { Href= "TestHandler.ashx?action=list-"+cId+"-"+(i+1),Title=i+1 };
+                pageData[i] = new { Href= "TestHandler.ashx?action=GetProduct&cId=" + cId+ "&pageIndex=" + (i+1),Title=i+1 };
             }
             var data = new
             {
@@ -88,9 +95,11 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
+                paraTotal,//总条数
+                pageIndex,//当前页
+                pageData,//页码渲染
+                pageCount,//总页数
                 productList = GetParaByCId(cId,pageIndex,20),
-                pageData,
-                pageTotal,
                 newsList = GetParaByCId("20", 1,20)
             };
             return WriteTemplate(data, "list-" + cId + ".html");
@@ -106,7 +115,21 @@ namespace fbkc
             int pageIndex = 1;
             if(context.Request["pageIndex"]!=null)
             {
-                pageIndex=int.Parse(context.Request["pageIndex"]);
+                try
+                {
+                    pageIndex = int.Parse(context.Request["pageIndex"]);
+                }
+                catch
+                {
+
+                }
+            }
+            int paraTotal = bll.GetPageTotal(cId);//此行业总条数
+            int pageCount = (int)Math.Ceiling(paraTotal / 20.0);//总页数（每页20条）
+            object[] pageData = new object[pageCount];
+            for (int i = 0; i < pageCount; i++)
+            {
+                pageData[i] = new { Href = "TestHandler.ashx?action=GetNews&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
             }
             var data = new
             {
@@ -114,6 +137,10 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
+                paraTotal,//总条数
+                pageIndex,//当前页
+                pageData,//页码渲染
+                pageCount,//总页数
                 newsList = GetParaByCId("20", pageIndex, 20),
                 productList = GetNoNewsByCId("20", "20")
             };
@@ -218,7 +245,7 @@ namespace fbkc
         /// <returns></returns>
         public List<htmlPara> GetNoNewsByCId(string count, string columnId)
         {
-            List<htmlPara> hList = bll.GetHtmlList(string.Format("where columnId!='{0}' order by addTime desc", columnId), count);
+            List<htmlPara> hList = bll.GetHtmlList(count,columnId);
             return hList;
         }
         public bool IsReusable
