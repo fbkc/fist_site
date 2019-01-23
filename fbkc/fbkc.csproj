@@ -71,40 +71,34 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="MainHandler.ashx" />
+    <Content Include="sitemap.xml" />
+    <Content Include="sitemaps.xml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Newtonsoft.Json.dll" />
     <Content Include="NVelocity.dll" />
+    <Content Include="statics\css\slide.css" />
+    <Content Include="statics\css\style.css" />
+    <Content Include="statics\images\favicon.ico" />
     <Content Include="statics\images\logo.jpg" />
     <Content Include="statics\images\nopic.gif" />
     <Content Include="statics\images\qq.gif" />
     <Content Include="statics\images\search_but_1011.jpg" />
+    <Content Include="statics\js\date.js" />
+    <Content Include="statics\js\gundong.js" />
+    <Content Include="statics\js\slide.js" />
     <Content Include="templates\foot.html" />
     <Content Include="templates\head.html" />
-    <Content Include="templates\list-2.html" />
-    <Content Include="templates\list-3.html" />
-    <Content Include="templates\list-4.html" />
-    <Content Include="templates\list-5.html" />
-    <Content Include="templates\list-6.html" />
-    <Content Include="templates\list-7.html" />
-    <Content Include="templates\list-8.html" />
-    <Content Include="templates\list-9.html" />
-    <Content Include="templates\list-10.html" />
-    <Content Include="templates\list-11.html" />
-    <Content Include="templates\list-12.html" />
-    <Content Include="templates\list-13.html" />
-    <Content Include="templates\list-14.html" />
-    <Content Include="templates\list-15.html" />
-    <Content Include="templates\list-16.html" />
-    <Content Include="templates\list-17.html" />
-    <Content Include="templates\list-18.html" />
-    <Content Include="templates\list-19.html" />
-    <Content Include="templates\list-1.html" />
-    <Content Include="templates\list-21.html" />
-    <Content Include="templates\list-20.html" />
-    <Content Include="templates\list-22.html" />
+    <Content Include="templates\MoreProduct.html" />
+    <Content Include="templates\MoreNews.html" />
+    <Content Include="templates\Product.html" />
+    <Content Include="templates\News.html" />
     <Content Include="templates\MainPage.html" />
     <Content Include="templates\navigation.html" />
     <Content Include="TestHandler.ashx" />
+    <Content Include="statics\js\jquery.lazyload" />
+    <Content Include="statics\js\public\jquery.min" />
+    <Content Include="statics\js\base64.min" />
+    <Content Include="statics\js\responsiveslides.min" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,6 +116,7 @@
   <ItemGroup>
     <Compile Include="BLL.cs" />
     <Compile Include="cmUserInfo.cs" />
+    <Compile Include="columnInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -143,6 +138,7 @@
     <Compile Include="TestHandler.ashx.cs">
       <DependentUpon>TestHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="UrlRewriter.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

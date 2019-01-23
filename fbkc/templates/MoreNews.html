@@ -1,7 +1,7 @@
 ﻿#parse("head.html")
 <div class="swdh">
-    当前位置：<a href="http://www.cnhbw.net/qynews/">首页</a> >
-    <a href="http://www.cnhbw.net/qynews/list-2.html">新闻栏目</a>
+    当前位置：<a href="TestHandler.ashx?action=mainpage">首页</a> >
+    <a href="TestHandler.ashx?action=MoreNews">新闻栏目</a>
 </div>
 #parse("navigation.html")
 <div class="swnr" style="margin-top: 10px;">
@@ -61,7 +61,7 @@
         }
     </style>
     <div class="listd">
-        <h5 class="title-1">最新新闻<a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-20" class="more">更多>></a></h5>
+        <h5 class="title-1">最新新闻<a href="TestHandler.ashx?action=GetProduct&cId=20" class="more">更多>></a></h5>
         <div class="bk15"></div>
         <ul class="listv">
             #foreach($h in $data.newsTitle)
@@ -69,14 +69,14 @@
             #end
         </ul>
     </div>
-    <!--<div class="listd">
-        <h5 class="title-1">最新新闻<a href="http://www.cnhbw.net/qynews/list-32.html" class="more">更多>></a></h5>
+    <div class="listd">
+        <h5 class="title-1">最新新闻<a href="TestHandler.ashx?action=GetProduct&cId=20" class="more">更多>></a></h5>
         <div class="bk15"></div>
         <ul class="listv">
             #foreach($h in $newsTitle)
             <li><a href="$h.titleURL" target="_blank">$h.title</a><span>$h.addTime</span></li>
             #end
         </ul>
-    </div>-->
+    </div>
 </div>
     #parse("foot.html")

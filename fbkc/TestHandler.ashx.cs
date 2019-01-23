@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using HRMSys.DAL;
+using Model;
 using NVelocity;
 using NVelocity.App;
 using NVelocity.Runtime;
@@ -33,10 +34,10 @@ namespace fbkc
                     switch (_strAction.Trim())
                     {
                         case "mainpage": _strContent.Append(MainPage(context)); break;
-                        case "GetProduct": _strContent.Append(GetProduct(context, "1")); break;//产品列表
-                        case "GetNews": _strContent.Append(GetNews(context, "20")); break;//新闻列表
-                        case "list-21": _strContent.Append(MoreProduct(context)); break;//更多产品
-                        case "list-22": _strContent.Append(MoreNews(context)); break;//更多新闻
+                        case "GetProduct": _strContent.Append(GetProduct(context)); break;//产品列表
+                        case "GetNews": _strContent.Append(GetNews(context)); break;//新闻列表
+                        case "MoreProduct": _strContent.Append(MoreProduct(context)); break;//更多产品
+                        case "MoreNews": _strContent.Append(MoreNews(context)); break;//更多新闻
                         default: break;
                     }
                 }
@@ -55,12 +56,13 @@ namespace fbkc
                 htmlTitle = hostName,
                 hostName,
                 hostUrl,
+                columnsList = bll.GetColumns(""),//导航
                 lunboTitle = GetParaByCId("20", 1,6),//轮播标题，推荐新闻
                 tuijianTitle = GetNoNewsByCId("12", "20"),//推荐产品
                 productTitle = GetNoNewsByCId("30", "20"),//最新产品，无分类
                 newsTitle = GetParaByCId("20", 1,30)//最新新闻
             };
-            return WriteTemplate(data, "MainPage.html");
+            return SqlHelperCatalog.WriteTemplate(data, "MainPage.html");
         }
         /// <summary>
         /// 产品列表页
@@ -68,7 +70,7 @@ namespace fbkc
         /// <param name="context"></param>
         /// <param name="cId"></param>
         /// <returns></returns>
-        public string GetProduct(HttpContext context, string cId)
+        public string GetProduct(HttpContext context)
         {
             int pageIndex = 1;
             if (context.Request["pageIndex"] != null)
@@ -82,6 +84,7 @@ namespace fbkc
 
                 }
             }
+            string cId = context.Request["cId"];
             int paraTotal = bll.GetPageTotal(cId);//此行业总条数
             int pageCount = (int)Math.Ceiling(paraTotal / 20.0);//总页数（每页20条）
             object[] pageData = new object[pageCount];
@@ -95,6 +98,8 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
+                columnsList = bll.GetColumns(""),//导航
+                columnName = bll.GetColumns("where Id="+cId)[0].columnName,
                 paraTotal,//总条数
                 pageIndex,//当前页
                 pageData,//页码渲染
@@ -102,7 +107,7 @@ namespace fbkc
                 productList = GetParaByCId(cId,pageIndex,20),
                 newsList = GetParaByCId("20", 1,20)
             };
-            return WriteTemplate(data, "list-" + cId + ".html");
+            return SqlHelperCatalog.WriteTemplate(data, "Product.html");
         }
         /// <summary>
         /// 新闻列表页
@@ -110,7 +115,7 @@ namespace fbkc
         /// <param name="context"></param>
         /// <param name="cId"></param>
         /// <returns></returns>
-        public string GetNews(HttpContext context, string cId)
+        public string GetNews(HttpContext context)
         {
             int pageIndex = 1;
             if(context.Request["pageIndex"]!=null)
@@ -124,6 +129,7 @@ namespace fbkc
 
                 }
             }
+            string cId = context.Request["cId"];
             int paraTotal = bll.GetPageTotal(cId);//此行业总条数
             int pageCount = (int)Math.Ceiling(paraTotal / 20.0);//总页数（每页20条）
             object[] pageData = new object[pageCount];
@@ -137,6 +143,8 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
+                columnsList = bll.GetColumns(""),//导航
+                columnName = bll.GetColumns("where Id=" + cId)[0].columnName,
                 paraTotal,//总条数
                 pageIndex,//当前页
                 pageData,//页码渲染
@@ -144,7 +152,7 @@ namespace fbkc
                 newsList = GetParaByCId("20", pageIndex, 20),
                 productList = GetNoNewsByCId("20", "20")
             };
-            return WriteTemplate(data, "list-" + cId + ".html");
+            return SqlHelperCatalog.WriteTemplate(data, "News.html");
         }
         /// <summary>
         /// 更多产品页
@@ -180,7 +188,7 @@ namespace fbkc
                 c18Title = GetParaByCId("18", 1, 10),
                 c19Title = GetParaByCId("19", 1, 10)
             };
-            return WriteTemplate(data, "list-21.html");
+            return SqlHelperCatalog.WriteTemplate(data, "MoreProduct.html");
         }
         /// <summary>
         /// 更多新闻页
@@ -198,30 +206,7 @@ namespace fbkc
                 cId,
                 newsTitle = GetParaByCId("20", 1,30)
             };
-            return WriteTemplate(data, "list-22.html");
-        }
-        /// <summary>
-        /// 渲染模板引擎
-        /// </summary>
-        /// <param name="dic">需要替换的参数</param>
-        /// <param name="temp">html文件名</param>
-        /// <returns></returns>
-        public string WriteTemplate(object data, string temp)
-        {
-            //用的时候考代码即可，只需改三个地方：模板所在文件夹、添加数据、设定模板
-            VelocityEngine vltEngine = new VelocityEngine();
-            vltEngine.SetProperty(RuntimeConstants.RESOURCE_LOADER, "file");
-            vltEngine.SetProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, System.Web.Hosting.HostingEnvironment.MapPath("~/templates"));//模板文件所在的文件夹，例如我的模板为templates文件夹下的TestNV.html
-            vltEngine.Init();
-
-            VelocityContext vltContext = new VelocityContext();
-            vltContext.Put("data", data);//可添加多个数据，基本支持所有数据类型，包括字典、数据、datatable等  添加数据，在模板中可以通过$dataName来引用数据
-            Template vltTemplate = vltEngine.GetTemplate(temp);//设定模板
-            System.IO.StringWriter vltWriter = new System.IO.StringWriter();
-            vltTemplate.Merge(vltContext, vltWriter);
-
-            string html = vltWriter.GetStringBuilder().ToString();
-            return html;//返回渲染生成的标准html代码字符串
+            return SqlHelperCatalog.WriteTemplate(data, "MoreNews.html");
         }
 
         private BLL bll = new BLL();

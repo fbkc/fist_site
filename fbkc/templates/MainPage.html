@@ -1,178 +1,121 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <title>$data.htmlTitle</title>
-    <meta name="keywords" content="$data.hostName" />
-    <meta name="description" content="$data.hostName" />
-    <meta name="applicable-device" content="pc,mobile" />
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <link rel="icon" href="http://www.cnhbw.net/qynews/favicon.ico" />
-    <link href="http://www.cnhbw.net/qynews/statics/css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/public/jquery.min.js"></script>
-    <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/js/base64.min.js"></script>
-    <script type="text/javascript">var Tool = { 'host': '$data.hostUrl', 'logged': false }; function InfoHeadSearch() { }</script>
-</head>
-<body>
-    <div class="banner">
-        <div class="logo" id="logo">
-            <img src="../statics/images/logo.jpg" width="230" height="60" />
-        </div>
-        <div class="search">
-            <div id="page">
-                <div id="container" class="content clearfix">
-                    <div class="box-css clearfix">
-                        <div class="searchbg"></div>
-                        <div class="searchcontainer">
-                            <div class="searchselect">
-                                <span id="type" typeid="1">新闻</span>
-                                <a class="searchselectbtn" id="searchSelected" href="javascript:;"></a>
-                                <ul id="selectTypeList">
-                                    <li typeid="1"><a class=current href="javascript:;">新闻</a></li>
-                                    <li typeid="2"><a class=current href="javascript:;">产品</a></li>
-                                    <li class="last"></li>
-                                </ul>
-                            </div>
-                            <input id="q" class="ipt" type="text" name="q" autocomplete="off" onblur="if (this.value == '') { this.value = '请输入关键词'; }else { };" onfocus="this.value='';" placeholder="请输入关键词" value="" onkeydown="if (event.keyCode == 13){InfoHeadSearch();}" />
-                            <input class="button" type="submit" style="background:url(../statics/images/search_but_1011.jpg) no-repeat; width:70px;height:35px;cursor:pointer;border:none;margin:0px;" value="" onclick="javascript:InfoHeadSearch();" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <div class="xwrcs">
-                <script type="text/javascript" src="http://www.cnhbw.net/qynews/statics/js/date.js" charset="utf-8"></script>
-            </div>
-        </div>
-        <div class="member">
-            <table width="80" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="72"><a target="_blank" href="http://www.cnhbw.net/qynews/login.html" rel="nofollow" id="login">会员登录</a></td>
-                </tr>
-            </table>
-        </div>
-        <div class="clear" id="site_title"></div>
-    </div>
-    #include("navigation.html")
-    <link href="http://www.cnhbw.net/qynews/statics/css/slide.css" rel="stylesheet" type="text/css" />
-    <script src="http://www.cnhbw.net/qynews/statics/js/responsiveslides.min.js"></script>
-    <script src="http://www.cnhbw.net/qynews/statics/js/slide.js"></script>
-    <style type="text/css">
-        .slide_nav {
-            display: none;
-        }
+﻿#parse("head.html")
+#parse("navigation.html")
+<link href="../statics/css/slide.css" rel="stylesheet" type="text/css" />
+<script src="../statics/js/responsiveslides.min.js"></script>
+<script src="../statics/js/slide.js"></script>
+<style type="text/css">
+    .slide_nav {
+        display: none;
+    }
 
-        .swtuijian-r ul li {
-            font-size: 14px;
-        }
-    </style>
-    <div class="layout mgb10 clearfix">
+    .swtuijian-r ul li {
+        font-size: 14px;
+    }
+</style>
+<div class="layout mgb10 clearfix">
+    <div class="hotwords-tl">
+        <h4>推荐新闻</h4>
+    </div>
+    <div class="swtuijian-e">
+        <div class="swhuandeng" style="height:205px;margin-top: 3px;">
+            <div class="slide_container">
+                <ul class="rslides" id="slider">
+                    #foreach($h in $data.lunboTitle)
+                    <li>
+                        <a href="$h.titleURL" target="_blank">
+                            <img src="$h.titleImg" onerror="this.src = '../statics/images/nopic.gif'" />
+                            <p class="caption">$h.title</p>
+                        </a>
+                    </li>
+                    #end
+                </ul>
+            </div>
+        </div>
+        <div class="swtuijian-r" style="margin-top: 10px;">
+            <ul>
+                #foreach($h in $data.tuijianTitle)
+                <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
+                #end
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="lists">
+    <div class="list1">
         <div class="hotwords-tl">
-            <h4>推荐新闻</h4>
+            <h4>最新产品</h4>
         </div>
-        <div class="swtuijian-e">
-            <div class="swhuandeng" style="height:205px;margin-top: 3px;">
-                <div class="slide_container">
-                    <ul class="rslides" id="slider">
-                        #foreach($h in $data.lunboTitle)
-                        <li>
-                            <a href="$h.titleURL" target="_blank">
-                                <img src="$h.titleImg" onerror="this.src = '../statics/images/nopic.gif'" />
-                                <p class="caption">$h.title</p>
-                            </a>
-                        </li>
-                        #end
-                    </ul>
-                </div>
-            </div>
-            <div class="swtuijian-r" style="margin-top: 10px;">
-                <ul>
-                    #foreach($h in $data.tuijianTitle)
-                    <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
-                    #end
-                </ul>
-            </div>
+        <div class="list1-e">
+            <ul>
+                #foreach($h in $data.productTitle)
+                <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
+                #end
+            </ul>
+            <div class="listmore"><a href="TestHandler.ashx?action=MoreProduct" target="_blank">更多产品</a></div>
         </div>
     </div>
-    <div class="lists">
-        <div class="list1">
-            <div class="hotwords-tl">
-                <h4>最新产品</h4>
-            </div>
-            <div class="list1-e">
-                <ul>
-                    #foreach($h in $data.productTitle)
-                    <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
-                    #end
-                </ul>
-                <div class="listmore"><a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-21" target="_blank">更多产品</a></div>
-            </div>
+    <div class="list2">
+        <div class="hotwords-tl">
+            <h4>最新新闻</h4>
         </div>
-        <div class="list2">
-            <div class="hotwords-tl">
-                <h4>最新新闻</h4>
-            </div>
-            <div class="list1-e">
-                <ul>
-                    #foreach($h in $data.newsTitle)
-                    <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
-                    #end
-                </ul>
-                <div class="listmore"><a href="http://39.105.196.3:8173/TestHandler.ashx?action=list-22" target="_blank">更多新闻</a></div>
-            </div>
+        <div class="list1-e">
+            <ul>
+                #foreach($h in $data.newsTitle)
+                <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
+                #end
+            </ul>
+            <div class="listmore"><a href="TestHandler.ashx?action=MoreNews" target="_blank">更多新闻</a></div>
         </div>
     </div>
-    <script src="http://www.cnhbw.net/qynews/statics/js/gundong.js"></script>
-    <div class="four">
-        <div id="scroll">
-            <!--底部滚动企业主站-->
-            <div id="ScrollMe" style="overflow: hidden; height: 27px">
-                <a href="http://www.cnhbw.net/qynews/user-zzxyky729.html" target="_blank">郑州祥云快运有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzrz1699.html" target="_blank">广州鸿标信息科技有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzrz1688.html" target="_blank">广州鸿标信息科技有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzrtscl.html" target="_blank">郑州荣拓水处理材料有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzmjjx.html" target="_blank">郑州茂久机械设备有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzhdjc666.html" target="_blank">郑州华大新型建材有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzgtmy.html" target="_blank">天津兆志钢铁贸易有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzgg888.html" target="_blank">山东兆志钢铁钢铁有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzgg2018.html" target="_blank">山东兆志钢铁有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zzgc.html" target="_blank">泰安正泽工程材料有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyxlx.html" target="_blank">海峰小龙虾繁育养殖基地</a>
-                <a href="http://www.cnhbw.net/qynews/user-zytdsm.html" target="_blank">天津正义通达商贸有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyssc88.html" target="_blank">厦工楚胜（湖北）专用汽车制造有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyqd.html" target="_blank">济宁正一庆典服务有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyjs123.html" target="_blank">山东远征金属材料有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyjg.html" target="_blank">南昌众源井盖有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zygtgs9.html" target="_blank">山东振宇钢铁有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyd666.html" target="_blank">石家庄盈都水处理设备有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zyb1991.html" target="_blank">广州厨圣坊餐饮管理有限公司</a>
-                <a href="http://www.cnhbw.net/qynews/user-zxyyc666.html" target="_blank">正旭园艺场</a>
-            </div>
+</div>
+<script src="../statics/js/gundong.js"></script>
+<div class="four">
+    <div id="scroll">
+        <!--底部滚动企业主站-->
+        <div id="ScrollMe" style="overflow: hidden; height: 27px">
+            <a href="http://www.cnhbw.net/qynews/user-zzxyky729.html" target="_blank">郑州祥云快运有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzrz1699.html" target="_blank">广州鸿标信息科技有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzrz1688.html" target="_blank">广州鸿标信息科技有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzrtscl.html" target="_blank">郑州荣拓水处理材料有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzmjjx.html" target="_blank">郑州茂久机械设备有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzhdjc666.html" target="_blank">郑州华大新型建材有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzgtmy.html" target="_blank">天津兆志钢铁贸易有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzgg888.html" target="_blank">山东兆志钢铁钢铁有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzgg2018.html" target="_blank">山东兆志钢铁有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zzgc.html" target="_blank">泰安正泽工程材料有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyxlx.html" target="_blank">海峰小龙虾繁育养殖基地</a>
+            <a href="http://www.cnhbw.net/qynews/user-zytdsm.html" target="_blank">天津正义通达商贸有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyssc88.html" target="_blank">厦工楚胜（湖北）专用汽车制造有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyqd.html" target="_blank">济宁正一庆典服务有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyjs123.html" target="_blank">山东远征金属材料有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyjg.html" target="_blank">南昌众源井盖有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zygtgs9.html" target="_blank">山东振宇钢铁有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyd666.html" target="_blank">石家庄盈都水处理设备有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zyb1991.html" target="_blank">广州厨圣坊餐饮管理有限公司</a>
+            <a href="http://www.cnhbw.net/qynews/user-zxyyc666.html" target="_blank">正旭园艺场</a>
         </div>
-        <SCRIPT>
-            new srcMarquee("ScrollMe", 0, 1, 808, 27, 30, 3000, 3000, 27)
-        </SCRIPT>
     </div>
-    <div class="soewl9"></div>
-    <div style="width:1178px;margin: 0 auto;border: #C2D2DF 1px dotted !important;padding: 10px;background:#FCFCFC;" id="mianze" rel="nofollow"></div>
-    <div class="soewl9"></div>
-    <script language=javascript src='http://vip.hsoow.com/?a=foot&name=&from=cnhbw' charset="utf-8"></script> <div class="footer">
-        <p>
-            Copyright © 2015-
-            <script type="text/javascript">var date = new Date; document.write(date.getFullYear());</script>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a target="_blank" href="http://www.cnhbw.net/qynews/sitemaps.xml">百度地图</a>
-            &nbsp;&nbsp;
-            <a target="_blank" href="http://www.cnhbw.net/qynews/sitemap.html">网站地图</a>
-        </p>
-    </div>
-    <script>
-        (function () {
-            var bp = document.createElement('script'); var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') { bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; }
-            else { bp.src = 'http://push.zhanzhang.baidu.com/push.js'; }
-            var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(bp, s);
-        })();</script>
+    <SCRIPT>
+        new srcMarquee("ScrollMe", 0, 1, 808, 27, 30, 3000, 3000, 27)
+    </SCRIPT>
+</div>
+<div style="width:1178px;margin: 0 auto;border: #C2D2DF 1px dotted !important;padding: 10px;background:#FCFCFC;" id="mianze" rel="nofollow"></div>
+<script language=javascript src='http://vip.hsoow.com/?a=foot&name=&from=cnhbw' charset="utf-8"></script> <div class="footer">
+    <p>
+        Copyright © 2015-
+        <script type="text/javascript">var date = new Date; document.write(date.getFullYear());</script>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a target="_blank" href="../sitemaps.xml">百度地图</a>
+        &nbsp;&nbsp;
+        <a target="_blank" href="../sitemap.html">网站地图</a>
+    </p>
+</div>
+<script>
+    (function () {
+        var bp = document.createElement('script'); var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') { bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; }
+        else { bp.src = 'http://push.zhanzhang.baidu.com/push.js'; }
+        var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(bp, s);
+    })();</script>
 </body>
 </html> 

@@ -265,5 +265,25 @@ where RANK2<=10").Tables[0];
             return (int)SqlHelperCatalog.ExecuteScalar("select count(*)  from htmlPara where columnId=@columnId",
                 new SqlParameter("@columnId", columnId));
         }
+        /// <summary>
+        /// 获取栏目信息
+        /// </summary>
+        /// <param name="sqlstr"></param>
+        /// <returns></returns>
+        public List<columnInfo> GetColumns(string sqlstr)
+        {
+            List<columnInfo> cList = new List<columnInfo>();
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable("select * from columnInfo " + sqlstr);
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                columnInfo cInfo = new columnInfo();
+                cInfo.Id = (int)row["Id"];
+                cInfo.columnName = (string)row["columnName"];
+                cList.Add(cInfo);
+            }
+            return cList;
+        }
     }
 }
