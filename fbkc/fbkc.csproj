@@ -75,6 +75,7 @@
     <Content Include="MainHandler.ashx" />
     <Content Include="sitemap.xml" />
     <Content Include="sitemaps.xml" />
+    <Content Include="ModelHandler.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Newtonsoft.Json.dll" />
     <Content Include="NVelocity.dll" />
@@ -88,6 +89,7 @@
     <Content Include="statics\js\date.js" />
     <Content Include="statics\js\gundong.js" />
     <Content Include="statics\js\slide.js" />
+    <Content Include="templates\DetailModel.html" />
     <Content Include="templates\foot.html" />
     <Content Include="templates\head.html" />
     <Content Include="templates\MoreProduct.html" />
@@ -127,6 +129,9 @@
     <Compile Include="json.cs" />
     <Compile Include="MainHandler.ashx.cs">
       <DependentUpon>MainHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelHandler.ashx.cs">
+      <DependentUpon>ModelHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="NetHelper.cs" />
     <Compile Include="PostService.asmx.cs">
