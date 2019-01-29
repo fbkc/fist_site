@@ -18,10 +18,10 @@ namespace fbkc
     public class ModelHandler : IHttpHandler
     {
         private BLL bll = new BLL();
-        private string host = "http://39.105.196.3:8173/test";
+        private string host = "http://39.105.196.3:8173/";
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/html";
+            context.Response.ContentType = "text/plain";
             StringBuilder _strContent = new StringBuilder();
             if (_strContent.Length == 0)
             {
@@ -40,8 +40,6 @@ namespace fbkc
                 }
             }
             context.Response.Write(_strContent.ToString());
-            context.Response.ContentType = "text/html";
-
         }
         public string ModuleHtml(HttpContext context)
         {
@@ -63,15 +61,16 @@ namespace fbkc
                 if (string.IsNullOrEmpty(cid))
                     return json.WriteJson(0, "行业或栏目不能为空", new { });
                 hInfo.columnId = cid;//行业id，行业新闻id=23
-                string content = context.Request["ssss"];
+                string content = context.Request["content"];
                 if (string.IsNullOrEmpty(content) || content.Length < 500)
                     return json.WriteJson(0, "文章不能少于500字，请丰富文章内容", new { });
                 hInfo.articlecontent = content;
                 //hInfo.articlecontent = HttpUtility.UrlDecode(jo["content"].ToString(), Encoding.UTF8);//内容,UrlDecode解码
                 //命名规则：ip/目录/用户名/show_行业id+(五位数id)
                 string htmlId = (bll.GetMaxId() + 1).ToString();
-                string showName = "show_" + cid + "_" + htmlId + ".html";
-                url = host + "/" + username + "/" + showName;
+                //string showName = "show_" + cid + "_" + htmlId + ".html";
+                //url = host + "/" + username + "/" + showName;
+                url = string.Format(host+"TestHandler.ashx?action=DetailPage&cId={0}&Id={1}", cid, htmlId);
                 hInfo.titleURL = url;
                 hInfo.pinpai = context.Request["pinpai"];
                 hInfo.xinghao = context.Request["xinghao"];
@@ -82,30 +81,37 @@ namespace fbkc
                 hInfo.city = context.Request["city"];
                 hInfo.titleImg = context.Request["thumb"];
                 hInfo.addTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                hInfo.username = username;
+                //公司 / 会员信息
+                cmUserInfo uInfo = bll.GetUser(string.Format("where username='{0}'", username));
+                hInfo.companyName = uInfo.companyName;
+                hInfo.com_web = uInfo.com_web;
                 //hInfo.realmNameId = "1";//发到哪个站
                 bll.AddHtml(hInfo);//存入数据库
 
-                //公司/会员信息
-                cmUserInfo uInfo = bll.GetUser(string.Format("where username='{0}'", username));
-                string keyword = "";//关键词
-                string description = "";//描述
-                if (hInfo.title.Length > 6)
-                    keyword = hInfo.title + "," + hInfo.title.Substring(0, 2) + "," + hInfo.title.Substring(2, 2) + "," + hInfo.title.Substring(4, 2);
-                else
-                    keyword = hInfo.title;
-                description = hInfo.articlecontent.Substring(0, 80);
-                var data = new
-                {
-                    hInfo,
-                    uInfo,
-                    keyword,
-                    description,
-                    host,
-                    htmlId,
-                    username
-                };
-                string html = SqlHelperCatalog.WriteTemplate(data, "DetailModel.html");
-                WriteFile(html, showName, username);//写模板
+                //公司 / 会员信息
+                //cmUserInfo uInfo = bll.GetUser(string.Format("where username='{0}'", username));
+                //string keyword = "";//关键词
+                //string description = "";//描述
+                //if (hInfo.title.Length > 6)
+                //    keyword = hInfo.title + "," + hInfo.title.Substring(0, 2) + "," + hInfo.title.Substring(2, 2) + "," + hInfo.title.Substring(4, 2);
+                //else
+                //    keyword = hInfo.title;
+                //description = hInfo.articlecontent.Substring(0, 80);
+                //var data = new
+                //{
+                //    title= hInfo.title+"_"+uInfo.companyName,
+                //    hInfo,
+                //    uInfo,
+                //    keyword,
+                //    description,
+                //    host,
+                //    htmlId,
+                //    columnName = bll.GetColumns("where Id=" + cid)[0].columnName,
+                //    username
+                //};
+                //string html = SqlHelperCatalog.WriteTemplate(data, "DetailModel.html");
+                //WriteFile(html, showName, username);//写模板
             }
             catch (Exception ex)
             {

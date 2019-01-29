@@ -1,10 +1,12 @@
-﻿using HRMSys.DAL;
+﻿using AutoSend;
+using HRMSys.DAL;
 using Model;
 using NVelocity;
 using NVelocity.App;
 using NVelocity.Runtime;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -27,7 +29,7 @@ namespace fbkc
                 string _strAction = context.Request.Params["action"];
                 if (string.IsNullOrEmpty(_strAction))
                 {
-                    _strContent.Append(_strContent.Append("404.html"));
+                    _strContent.Append(_strContent.Append(SqlHelperCatalog.WriteTemplate("", "404.html")));
                 }
                 else
                 {
@@ -38,12 +40,60 @@ namespace fbkc
                         case "GetNews": _strContent.Append(GetNews(context)); break;//新闻列表
                         case "MoreProduct": _strContent.Append(MoreProduct(context)); break;//更多产品
                         case "MoreNews": _strContent.Append(MoreNews(context)); break;//更多新闻
+                        case "DetailPage": _strContent.Append(DetailPage(context)); break;//渲染详情页
                         default: break;
                     }
                 }
             }
             context.Response.Write(_strContent.ToString());
         }
+        public string DetailPage(HttpContext context)
+        {
+            string columnId = context.Request["cId"];
+            string Id = context.Request["Id"];
+            if (string.IsNullOrEmpty(columnId) || string.IsNullOrEmpty(Id))
+                return SqlHelperCatalog.WriteTemplate("", "404.html");
+            try
+            {
+                htmlPara hInfo = bll.GetHtmlPara(columnId, Id);
+                string keyword = "";//关键词
+                if (hInfo.title.Length > 6)
+                    keyword = hInfo.title + "," + hInfo.title.Substring(0, 2) + "," + hInfo.title.Substring(2, 2) + "," + hInfo.title.Substring(4, 2);
+                else
+                    keyword = hInfo.title;
+                List<htmlPara> pList = bll.GetHtmlBAPage(columnId, Id);//上一篇，下一篇
+                object BPage = null,APage=null;
+                if (pList.Count == 2)
+                {
+                    BPage = new { Href = pList[0].titleURL, Title = pList[0].title };
+                    APage = new { Href = pList[1].titleURL, Title = pList[1].title };
+                }
+                else
+                {
+                    BPage = new  { Href = pList[0].titleURL, Title = pList[0].title };
+                    APage = new { Href = "javascript:alert('没有了');", Title = "没有了" };
+                }
+                var data = new
+                {
+                    title = hInfo.title + "_" + hInfo.companyName,
+                    hInfo,
+                    keyword,
+                    description = BLL.ReplaceHtmlTag(hInfo.articlecontent, 80),//产品简介
+                    host = hostUrl,
+                    BPage,
+                    APage,
+                    ProductFloat = bll.GetProFloat(hInfo.userId),
+                    NewsFloat= bll.GetNewsFloat(hInfo.userId)
+                };
+                string html = SqlHelperCatalog.WriteTemplate(data, "DetailModel.html");
+                return html;
+            }
+            catch (Exception ex)
+            {
+                return json.WriteJson(0, ex.ToString(), new { });
+            }
+        }
+
         /// <summary>
         /// 主页
         /// </summary>
@@ -57,10 +107,10 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 columnsList = bll.GetColumns(""),//导航
-                lunboTitle = GetParaByCId("20", 1,6),//轮播标题，推荐新闻
+                lunboTitle = GetParaByCId("20", 1, 6),//轮播标题，推荐新闻
                 tuijianTitle = GetNoNewsByCId("12", "20"),//推荐产品
                 productTitle = GetNoNewsByCId("30", "20"),//最新产品，无分类
-                newsTitle = GetParaByCId("20", 1,30)//最新新闻
+                newsTitle = GetParaByCId("20", 1, 30)//最新新闻
             };
             return SqlHelperCatalog.WriteTemplate(data, "MainPage.html");
         }
@@ -88,9 +138,9 @@ namespace fbkc
             int paraTotal = bll.GetPageTotal(cId);//此行业总条数
             int pageCount = (int)Math.Ceiling(paraTotal / 20.0);//总页数（每页20条）
             object[] pageData = new object[pageCount];
-            for(int i=0;i< pageCount; i++)
+            for (int i = 0; i < pageCount; i++)
             {
-                pageData[i] = new { Href= "TestHandler.ashx?action=GetProduct&cId=" + cId+ "&pageIndex=" + (i+1),Title=i+1 };
+                pageData[i] = new { Href = "TestHandler.ashx?action=GetProduct&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
             }
             var data = new
             {
@@ -99,13 +149,13 @@ namespace fbkc
                 hostUrl,
                 cId,
                 columnsList = bll.GetColumns(""),//导航
-                columnName = bll.GetColumns("where Id="+cId)[0].columnName,
+                columnName = bll.GetColumns("where Id=" + cId)[0].columnName,
                 paraTotal,//总条数
                 pageIndex,//当前页
                 pageData,//页码渲染
                 pageCount,//总页数
-                productList = GetParaByCId(cId,pageIndex,20),
-                newsList = GetParaByCId("20", 1,20)
+                productList = GetParaByCId(cId, pageIndex, 20),
+                newsList = GetParaByCId("20", 1, 20)
             };
             return SqlHelperCatalog.WriteTemplate(data, "Product.html");
         }
@@ -118,7 +168,7 @@ namespace fbkc
         public string GetNews(HttpContext context)
         {
             int pageIndex = 1;
-            if(context.Request["pageIndex"]!=null)
+            if (context.Request["pageIndex"] != null)
             {
                 try
                 {
@@ -168,7 +218,7 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
-                c1Title = GetParaByCId("1", 1,10),
+                c1Title = GetParaByCId("1", 1, 10),
                 c2Title = GetParaByCId("2", 1, 10),
                 c3Title = GetParaByCId("3", 1, 10),
                 c4Title = GetParaByCId("4", 1, 10),//工具量具，不显示
@@ -204,7 +254,7 @@ namespace fbkc
                 hostName,
                 hostUrl,
                 cId,
-                newsTitle = GetParaByCId("20", 1,30)
+                newsTitle = GetParaByCId("20", 1, 30)
             };
             return SqlHelperCatalog.WriteTemplate(data, "MoreNews.html");
         }
@@ -217,9 +267,9 @@ namespace fbkc
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页条数</param>
         /// <returns></returns>
-        public List<htmlPara> GetParaByCId(string columnId,int pageIndex,int pageSize )
+        public List<htmlPara> GetParaByCId(string columnId, int pageIndex, int pageSize)
         {
-            List<htmlPara> hList = bll.GetHtmlList(columnId,pageIndex,pageSize);
+            List<htmlPara> hList = bll.GetHtmlList(columnId, pageIndex, pageSize);
             return hList;
         }
         /// <summary>
@@ -230,7 +280,7 @@ namespace fbkc
         /// <returns></returns>
         public List<htmlPara> GetNoNewsByCId(string count, string columnId)
         {
-            List<htmlPara> hList = bll.GetHtmlList(count,columnId);
+            List<htmlPara> hList = bll.GetHtmlList(count, columnId);
             return hList;
         }
         public bool IsReusable

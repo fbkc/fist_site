@@ -89,6 +89,9 @@
     <Content Include="statics\js\date.js" />
     <Content Include="statics\js\gundong.js" />
     <Content Include="statics\js\slide.js" />
+    <Content Include="templates\404.html" />
+    <Content Include="templates\DetailModelSum.html" />
+    <Content Include="templates\DetailModel1.html" />
     <Content Include="templates\DetailModel.html" />
     <Content Include="templates\foot.html" />
     <Content Include="templates\head.html" />
@@ -99,10 +102,10 @@
     <Content Include="templates\MainPage.html" />
     <Content Include="templates\navigation.html" />
     <Content Include="TestHandler.ashx" />
-    <Content Include="statics\js\jquery.lazyload" />
-    <Content Include="statics\js\public\jquery.min" />
-    <Content Include="statics\js\base64.min" />
-    <Content Include="statics\js\responsiveslides.min" />
+    <Content Include="statics\js\jquery.lazyload.js" />
+    <Content Include="statics\public\jquery.min.js" />
+    <Content Include="statics\js\base64.min.js" />
+    <Content Include="statics\js\responsiveslides.min.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -115,7 +118,9 @@
     <Content Include="DetailPage.html" />
     <Content Include="PostService.asmx" />
     <Content Include="UrlRewriter.dll" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL.cs" />
@@ -144,6 +149,7 @@
     <Compile Include="TestHandler.ashx.cs">
       <DependentUpon>TestHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

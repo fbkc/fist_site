@@ -57,7 +57,115 @@ namespace fbkc
             userInfo.ziduan1 = (string)row["ziduan1"];
             return userInfo;
         }
-
+        /// <summary>
+        /// 获取单条信息
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="columnId"></param>
+        /// <returns></returns>
+        public htmlPara GetHtmlPara(string columnId, string Id)
+        {
+            htmlPara hPara = new htmlPara();
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select * from htmlPara h left join columnInfo c on h.columnId=c.Id  where columnId =@columnId and h.Id=@Id",
+               new SqlParameter("@columnId", columnId),
+               new SqlParameter("@Id", Id));
+            if (dt.Rows.Count != 1)
+                return null;
+            DataRow row = dt.Rows[0];
+            hPara.Id = (long)SqlHelper.FromDBNull(row["Id"]);
+            hPara.userId = SqlHelper.FromDBNull(row["userId"]).ToString();
+            hPara.title = (string)SqlHelper.FromDBNull(row["title"]);
+            hPara.titleImg = (string)SqlHelper.FromDBNull(row["titleImg"]);
+            hPara.titleURL = (string)SqlHelper.FromDBNull(row["titleURL"]);
+            hPara.columnId = (string)SqlHelper.FromDBNull(row["columnId"]);//栏目Id
+            string content = (string)SqlHelper.FromDBNull(row["articlecontent"]);
+            //hPara.articlecontent = ReplaceHtmlTag(content, 60);//产品简介
+            hPara.articlecontent = content;
+            hPara.city = (string)SqlHelper.FromDBNull(row["city"]);//生产城市
+            hPara.smallCount = (string)SqlHelper.FromDBNull(row["smallCount"]);//起订
+            hPara.xinghao = (string)SqlHelper.FromDBNull(row["xinghao"]);//型号
+            hPara.unit = (string)SqlHelper.FromDBNull(row["unit"]);//单位
+            hPara.sumCount = (string)SqlHelper.FromDBNull(row["sumCount"]);//供货总量
+            hPara.price = (string)SqlHelper.FromDBNull(row["price"]);//单价
+            hPara.pinpai = (string)SqlHelper.FromDBNull(row["pinpai"]);//品牌
+            hPara.companyName = (string)SqlHelper.FromDBNull(row["companyName"]);//公司名字
+            hPara.ten_qq = (string)SqlHelper.FromDBNull(row["ten_qq"]);
+            hPara.com_web = (string)SqlHelper.FromDBNull(row["com_web"]);//网址
+            hPara.addTime = ((DateTime)SqlHelper.FromDBNull(row["addTime"])).ToString("yyyy-MM-dd");
+            hPara.columnName = (string)SqlHelper.FromDBNull(row["columnName"]);//栏目名
+            hPara.username = (string)SqlHelper.FromDBNull(row["username"]);//用户名
+            return hPara;
+        }
+        /// <summary>
+        /// 查询上一条下一条
+        /// </summary>
+        /// <param name="columnId"></param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public List<htmlPara> GetHtmlBAPage(string columnId, string Id)
+        {
+            List<htmlPara> hList = new List<htmlPara>();
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select top 1 -1 as [Sort],Id,title,columnId,titleURL from (select top 1 Id,title,columnId,titleURL from htmlPara where columnId=@columnId and Id<@Id order by Id desc) as tab_up 
+                 union select top 1 1 as [Sort],Id,title,columnId,titleURL from (select top 1 Id,title,columnId,titleURL from htmlPara where columnId=@columnId and Id>@Id order by Id) as tab_up",
+               new SqlParameter("@columnId", columnId),
+               new SqlParameter("@Id",Id));
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                htmlPara hPara = new htmlPara();
+                hPara.Id = (long)row["Id"];
+                hPara.title = (string)row["title"];
+                hPara.titleURL = row["titleURL"].ToString();
+                hPara.columnId = (string)row["columnId"];
+                hList.Add(hPara);
+            }
+            return hList;
+        }
+        /// <summary>
+        /// 右侧浮动栏，前十条公司产品
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<htmlPara> GetProFloat(string userId)
+        {
+            List<htmlPara> hList = new List<htmlPara>();
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select top 10 * from htmlPara where userId=1 and columnId!=20 order by addTime desc",
+               new SqlParameter("@userId", userId));
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                htmlPara hPara = new htmlPara();
+                hPara.Id = (long)row["Id"];
+                hPara.title = (string)row["title"];
+                hPara.titleURL = row["titleURL"].ToString();
+                hList.Add(hPara);
+            }
+            return hList;
+        }
+        /// <summary>
+        /// 右侧浮动栏，前十条新闻
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<htmlPara> GetNewsFloat(string userId)
+        {
+            List<htmlPara> hList = new List<htmlPara>();
+            DataTable dt = SqlHelperCatalog.ExecuteDataTable(@"select top 10 * from htmlPara where userId=1 and columnId=20 order by addTime desc",
+               new SqlParameter("@userId", userId));
+            if (dt.Rows.Count < 1)
+                return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                htmlPara hPara = new htmlPara();
+                hPara.Id = (long)row["Id"];
+                hPara.title = (string)row["title"];
+                hPara.titleURL = row["titleURL"].ToString();
+                hList.Add(hPara);
+            }
+            return hList;
+        }
         /// <summary>
         /// 获取栏目页网页
         /// </summary>
@@ -104,7 +212,7 @@ namespace fbkc
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public List<htmlPara> GetHtmlList(string count,string columnId)
+        public List<htmlPara> GetHtmlList(string count, string columnId)
         {
             //分页查询
             List<htmlPara> hList = new List<htmlPara>();
@@ -200,7 +308,8 @@ where RANK2<=10").Tables[0];
            ,[city]
            ,[titleImg]
            ,[addTime]
-           ,[userId])
+           ,[userId]
+           ,[userName])
      VALUES
            (@title
            ,@titleURL
@@ -215,7 +324,8 @@ where RANK2<=10").Tables[0];
            ,@city
            ,@titleImg
            ,@addTime
-           ,@userId)",
+           ,@userId
+           ,@userName)",
                new SqlParameter("@title", SqlHelper.ToDBNull(info.title)),
                new SqlParameter("@titleURL", SqlHelper.ToDBNull(info.titleURL)),
                new SqlParameter("@articlecontent", SqlHelper.ToDBNull(info.articlecontent)),
@@ -229,7 +339,8 @@ where RANK2<=10").Tables[0];
                new SqlParameter("@city", SqlHelper.ToDBNull(info.city)),
                new SqlParameter("@titleImg", SqlHelper.ToDBNull(info.titleImg)),
                new SqlParameter("@addTime", SqlHelper.ToDBNull(info.addTime)),
-               new SqlParameter("@userId", SqlHelper.ToDBNull(info.userId)));
+               new SqlParameter("@userId", SqlHelper.ToDBNull(info.userId)),
+               new SqlParameter("@userName", SqlHelper.ToDBNull(info.username)));
         }
 
         /// <summary>

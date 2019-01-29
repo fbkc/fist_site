@@ -19,11 +19,14 @@ namespace Model
         public string sumCount { get; set; }
         public string unit { get; set; }
         public string city { get; set; }
-        public string ten_qq { get; set; }
-        public string companyName { get; set; }
-        public string com_web { get; set; }
         public string addTime { get; set; }
         public string columnId { get; set; }
+        public string columnName { get; set; }
         public string userId { get; set; }
+        public string username { get; set; }
+
+        public string companyName { get; set; }
+        public string ten_qq { get; set; }
+        public string com_web { get; set; }
     }
 }
