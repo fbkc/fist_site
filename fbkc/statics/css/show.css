@@ -1,0 +1,353 @@
+﻿@charset "utf-8";
+/**/
+.swnr {
+    width: 1200px;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.swnr-l {
+    width: 850px;
+    height: auto;
+    overflow: hidden;
+    float: left;
+    background: #FFF;
+    padding-bottom: 15px;
+}
+
+.swnr-r {
+    width: 335px;
+    height: auto;
+    overflow: hidden;
+    float: right;
+    padding-bottom: 10px;
+}
+/**/
+.neirong1 {
+    text-align: center;
+}
+
+    .neirong1 h1 {
+        font-size: 20px;
+        font-weight: 100;
+        color: #000;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .neirong1 p {
+        color: #999;
+        font-size: 13px;
+    }
+
+.neirong2 {
+    font-size: 14px;
+    line-height: 2;
+    color: #999;
+}
+
+.neirong3 {
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 30px;
+    margin: auto;
+    color: #333;
+}
+
+    .neirong3 img {
+        text-align: center;
+        display: block;
+        margin: 10px auto;
+    }
+
+    .neirong3 p {
+        height: auto;
+        margin: 20px 0;
+        font-size: 14px;
+        overflow: visible;
+        word-break: break-all;
+        line-height: 30px;
+    }
+
+.neirong4 {
+    width: 90%;
+    height: auto;
+    margin: auto;
+    font-size: 14px;
+    margin-top: 50px;
+}
+
+    .neirong4 ul li {
+        width: 90%;
+        float: left;
+        line-height: 30px;
+    }
+
+        .neirong4 ul li a {
+            color: #000;
+        }
+
+/**/
+.gqinfo {
+    width: 100%;
+    height: 200px;
+    padding-bottom: 40px;
+    border-bottom: 1px dotted #CCC;
+    margin-bottom: 30px;
+}
+
+.gqinfo-l {
+    width: 300px;
+    height: 200px;
+    float: left;
+    margin-top: 10px;
+}
+
+    .gqinfo-l ul li {
+        line-height: 32px;
+        font-size: 14px;
+    }
+
+.gfinfo-r {
+    width: 400px;
+    height: 200px;
+}
+
+.gqinfo-r img {
+    display: block;
+    width: 300px;
+    height: 200px;
+}
+
+/**/
+#article_details .readall_box {
+    position: relative;
+    z-index: 8;
+    padding: 0 0 25px;
+    margin-top: -192px;
+    text-align: center;
+}
+
+    #article_details .readall_box .read_more_mask {
+        height: 200px;
+        background: -moz-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+        background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#fff));
+        background: -o-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+    }
+
+    #article_details .readall_box .read_more_btn {
+        border: 1px solid #ca0c16;
+    }
+
+.btn-gray-fred:active, .btn-gray-fred:hover {
+    color: #ca0c16;
+    background: #FDE3E4;
+    cursor: pointer;
+}
+
+.btn-gray-fred {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #ca0c16;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #5a85b2;
+    line-height: 30px;
+    min-width: 100px;
+}
+
+.article_next_prev {
+    margin-top: 0;
+}
+
+.actionarea {
+    width: 95%;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+    .actionarea .left, .actionarea .right {
+        width: 50%;
+        overflow: hidden;
+        float: left;
+        box-sizing: border-box;
+        color: #999;
+        line-height: 86px;
+    }
+
+    .actionarea .left {
+        border-right: 1px solid #ddd;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .actionarea .right {
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .actionarea .left .text {
+        position: absolute;
+        top: 5px;
+        right: 51%;
+        line-height: 20px;
+    }
+
+    .actionarea .right .text {
+        position: absolute;
+        top: 5px;
+        left: 51%;
+        line-height: 20px;
+    }
+
+    .actionarea a {
+        font-size: 14px;
+        color: #333;
+    }
+
+        .actionarea a:hover {
+            color: #ff6f3d
+        }
+/**/
+.mgb10 {
+    margin-bottom: 10px;
+}
+
+.prdetail-comp {
+    padding: 0 6px;
+    border: 1px solid #DDD;
+    background-color: #FFF;
+    border-top: 2px solid #e44544;
+}
+
+    .prdetail-comp .grade {
+        font-size: 14px;
+        padding: 0 6px;
+        height: 40px;
+        line-height: 40px;
+        font-weight: bold;
+        border-bottom: 1px solid #DDD;
+    }
+
+    .prdetail-comp .comp-name {
+        height: 35px;
+        overflow: hidden;
+        padding: 0 5px;
+        color: #666;
+        font-size: 15px;
+        line-height: 35px;
+    }
+
+        .prdetail-comp .comp-name a {
+            color: #e44544;
+        }
+
+    .prdetail-comp .comp-txt {
+        padding: 0 5px 3px;
+        color: #444;
+        line-height: 27px;
+    }
+
+        .prdetail-comp .comp-txt li {
+            height: 27px;
+            overflow: hidden;
+        }
+
+        .prdetail-comp .comp-txt .pr {
+            height: auto;
+            overflow: hidden;
+        }
+
+        .prdetail-comp .comp-txt .tl {
+            color: #666;
+        }
+
+        .prdetail-comp .comp-txt .tl-2 {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .prdetail-comp .comp-txt .ct-2 {
+            display: inline-block;
+            width: 160px;
+        }
+
+    .prdetail-comp .btn {
+        height: 30px;
+        padding: 11px 7px;
+        border-top: 1px dashed #cbcbcb;
+        line-height: 30px;
+    }
+
+        .prdetail-comp .btn a {
+            float: left;
+            width: 106px;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .prdetail-comp .btn .btn-1 {
+            margin-right: 10px;
+            background-position: 0 -420px;
+        }
+
+        .prdetail-comp .btn .btn-2 {
+            background-position: 0 -380px;
+        }
+
+.shadow {
+    width: 335px;
+}
+
+.col-wrap {
+    border: 1px solid #DDD;
+    background-color: #FFF;
+    text-align: left;
+    border-top: 2px solid #e44544;
+}
+
+    .col-wrap h3 {
+        border-bottom: 1px solid #DDD;
+        font-size: 14px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+    }
+
+    .col-wrap .iconBox {
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .col-wrap .iconBox li {
+            width: 315px;
+            height: 30px;
+            font-size: 14px;
+            overflow: hidden;
+            line-height: 30px;
+            background: transparent url("../images/icoBq.png") no-repeat scroll 0px -183px;
+            text-indent: 10px;
+        }
+
+        .col-wrap .iconBox li {
+            display: block;
+            w;
+            white-space: nowrap;
+            ext-overflow: ellipsis;
+            overflow: hidden;
+        }

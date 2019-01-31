@@ -18,7 +18,7 @@ namespace fbkc
     public class ModelHandler : IHttpHandler
     {
         private BLL bll = new BLL();
-        private string host = "http://39.105.196.3:8173/";
+        private string host = "http://hyzx.100dh.cn:8173/";
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -60,18 +60,20 @@ namespace fbkc
                 string cid = context.Request["catid"];
                 if (string.IsNullOrEmpty(cid))
                     return json.WriteJson(0, "行业或栏目不能为空", new { });
-                hInfo.columnId = cid;//行业id，行业新闻id=23
+                hInfo.columnId = cid;//行业id，行业新闻id=20
                 string content = context.Request["content"];
                 if (string.IsNullOrEmpty(content) || content.Length < 500)
                     return json.WriteJson(0, "文章不能少于500字，请丰富文章内容", new { });
                 hInfo.articlecontent = content;
                 //hInfo.articlecontent = HttpUtility.UrlDecode(jo["content"].ToString(), Encoding.UTF8);//内容,UrlDecode解码
                 //命名规则：ip/目录/用户名/show_行业id+(五位数id)
-                string htmlId = (bll.GetMaxId() + 1).ToString();
-                //string showName = "show_" + cid + "_" + htmlId + ".html";
-                //url = host + "/" + username + "/" + showName;
-                url = string.Format(host+"TestHandler.ashx?action=DetailPage&cId={0}&Id={1}", cid, htmlId);
+                long htmlId = (bll.GetMaxId() + 1);
+                hInfo.Id = htmlId;
+                string showName = "show_" + cid + "_" + htmlId + ".html";
+                url = host + "test/" + username + "/" + showName;
                 hInfo.titleURL = url;
+                //hInfo.titleURL = string.Format("TestHandler.ashx?action=DetailPage&cId={0}&Id={1}", cid, htmlId);
+                //url = host + hInfo.titleURL;
                 hInfo.pinpai = context.Request["pinpai"];
                 hInfo.xinghao = context.Request["xinghao"];
                 hInfo.price = context.Request["price"];
@@ -89,29 +91,26 @@ namespace fbkc
                 //hInfo.realmNameId = "1";//发到哪个站
                 bll.AddHtml(hInfo);//存入数据库
 
-                //公司 / 会员信息
-                //cmUserInfo uInfo = bll.GetUser(string.Format("where username='{0}'", username));
-                //string keyword = "";//关键词
-                //string description = "";//描述
-                //if (hInfo.title.Length > 6)
-                //    keyword = hInfo.title + "," + hInfo.title.Substring(0, 2) + "," + hInfo.title.Substring(2, 2) + "," + hInfo.title.Substring(4, 2);
-                //else
-                //    keyword = hInfo.title;
-                //description = hInfo.articlecontent.Substring(0, 80);
-                //var data = new
-                //{
-                //    title= hInfo.title+"_"+uInfo.companyName,
-                //    hInfo,
-                //    uInfo,
-                //    keyword,
-                //    description,
-                //    host,
-                //    htmlId,
-                //    columnName = bll.GetColumns("where Id=" + cid)[0].columnName,
-                //    username
-                //};
-                //string html = SqlHelperCatalog.WriteTemplate(data, "DetailModel.html");
-                //WriteFile(html, showName, username);//写模板
+                string keyword = "";//关键词
+                string description = "";//描述
+                if (hInfo.title.Length > 6)
+                    keyword = hInfo.title + "," + hInfo.title.Substring(0, 2) + "," + hInfo.title.Substring(2, 2) + "," + hInfo.title.Substring(4, 2);
+                else
+                    keyword = hInfo.title;
+                description = BLL.ReplaceHtmlTag(hInfo.articlecontent, 80);//产品简介
+                var data = new
+                {
+                    title = hInfo.title + "_" + hInfo.companyName,
+                    hInfo,
+                    keyword,
+                    description,
+                    host,
+                    columnName=bll.GetColumns(" where Id="+cid)[0].columnName,
+                    ProductFloat = bll.GetProFloat(hInfo.userId),
+                    NewsFloat = bll.GetNewsFloat(hInfo.userId)
+                };
+                string html = SqlHelperCatalog.WriteTemplate(data, "DetailModel.html");
+                WriteFile(html, showName, username);//写模板
             }
             catch (Exception ex)
             {
@@ -132,7 +131,8 @@ namespace fbkc
         {
             //文件输出目录
             string path = HttpContext.Current.Server.MapPath("~/test/" + username + "/");
-            if (!Directory.Exists(path))//无此路径，则创建路径
+            //无此路径，则创建路径
+            if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }

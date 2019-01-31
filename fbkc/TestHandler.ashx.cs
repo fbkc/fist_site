@@ -19,7 +19,7 @@ namespace fbkc
     public class TestHandler : IHttpHandler
     {
         private string hostName = "100导航";
-        private string hostUrl = "http://39.105.196.3:8173/hyzx/";
+        private string hostUrl = "http://hyzx.100dh.cn:8173/";
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/html";
@@ -35,7 +35,7 @@ namespace fbkc
                 {
                     switch (_strAction.Trim())
                     {
-                        case "mainpage": _strContent.Append(MainPage(context)); break;
+                        case "MainPage": _strContent.Append(MainPage(context)); break;
                         case "GetProduct": _strContent.Append(GetProduct(context)); break;//产品列表
                         case "GetNews": _strContent.Append(GetNews(context)); break;//新闻列表
                         case "MoreProduct": _strContent.Append(MoreProduct(context)); break;//更多产品
@@ -61,18 +61,6 @@ namespace fbkc
                     keyword = hInfo.title + "," + hInfo.title.Substring(0, 2) + "," + hInfo.title.Substring(2, 2) + "," + hInfo.title.Substring(4, 2);
                 else
                     keyword = hInfo.title;
-                List<htmlPara> pList = bll.GetHtmlBAPage(columnId, Id);//上一篇，下一篇
-                object BPage = null,APage=null;
-                if (pList.Count == 2)
-                {
-                    BPage = new { Href = pList[0].titleURL, Title = pList[0].title };
-                    APage = new { Href = pList[1].titleURL, Title = pList[1].title };
-                }
-                else
-                {
-                    BPage = new  { Href = pList[0].titleURL, Title = pList[0].title };
-                    APage = new { Href = "javascript:alert('没有了');", Title = "没有了" };
-                }
                 var data = new
                 {
                     title = hInfo.title + "_" + hInfo.companyName,
@@ -80,8 +68,6 @@ namespace fbkc
                     keyword,
                     description = BLL.ReplaceHtmlTag(hInfo.articlecontent, 80),//产品简介
                     host = hostUrl,
-                    BPage,
-                    APage,
                     ProductFloat = bll.GetProFloat(hInfo.userId),
                     NewsFloat= bll.GetNewsFloat(hInfo.userId)
                 };

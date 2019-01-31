@@ -8,10 +8,10 @@
     <meta name="description" content="$data.description" />
     <meta name="applicable-device" content="pc,mobile" />
     <meta http-equiv="Cache-Control" content="no-transform" />
-    <link rel="icon" href="http://39.105.196.3:8173/statics/images/favicon.ico" />
-    <link href="http://39.105.196.3:8173/statics/css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://39.105.196.3:8173/statics/public/jquery.min.js"></script>
-    <script type="text/javascript" src="http://39.105.196.3:8173/statics/js/base64.min.js"></script>
+    <link rel="icon" href="http://hyzx.100dh.cn/statics/images/favicon.ico" />
+    <link href="http://hyzx.100dh.cn/statics/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://hyzx.100dh.cn/statics/public/jquery.min.js"></script>
+    <script type="text/javascript" src="http://hyzx.100dh.cn/statics/js/base64.min.js"></script>
     <script type="text/javascript">
         var Tool = { 'host': '$data.host', 'Catid': '$data.hInfo.columnId', 'Id': '$data.hInfo.Id', 'logged': false };
         function InfoHeadSearch() { }
@@ -20,7 +20,7 @@
 <body>
     <div class="banner">
         <div class="logo" id="logo">
-            <img src="http://39.105.196.3:8173/statics/images/logo.jpg" width="230" height="60" />
+            <img src="http://hyzx.100dh.cn/statics/images/logo.jpg" width="230" height="60" />
         </div>
         <div class="search">
             <div id="page">
@@ -38,14 +38,14 @@
                                 </ul>
                             </div>
                             <input id="q" class="ipt" type="text" name="q" autocomplete="off" onblur="if (this.value == ''){ this.value = '请输入关键词'; }else { };" onfocus="this.value='';" placeholder="请输入关键词" value="" onkeydown="if (event.keyCode == 13){InfoHeadSearch();}" />
-                            <input class="button" type="submit" style="background:url(http://39.105.196.3:8173/statics/images/search_but_1011.jpg) no-repeat; width:70px;height:35px;cursor:pointer;border:none;margin:0px;" value="" onclick="javascript:InfoHeadSearch();" />
+                            <input class="button" type="submit" style="background:url(http://hyzx.100dh.cn/statics/images/search_but_1011.jpg) no-repeat; width:70px;height:35px;cursor:pointer;border:none;margin:0px;" value="" onclick="javascript:InfoHeadSearch();" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
             <div class="xwrcs">
-                <script type="text/javascript" src="http://39.105.196.3:8173/statics/js/date.js" charset="utf-8"></script>
+                <script type="text/javascript" src="http://hyzx.100dh.cn/statics/js/date.js" charset="utf-8"></script>
             </div>
         </div>
         <div class="member">
@@ -73,7 +73,7 @@
     <div class="swdh">
         当前位置：<a href="TestHandler.ashx?action=mainpage">首页</a><span> &gt; </span>
         <a href="TestHandler.ashx?action=MoreProduct">产品栏目</a> >
-        <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId">$data.hInfo.columnName</a> >  正文
+        <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId">$data.columnName</a> >  正文
     </div>
     #parse("navigation.html")
     <div class="swnr" style="margin-top: 0px;">
@@ -82,7 +82,7 @@
                 <h1 style="font-size:20px; font-weight:100; color:#000; padding-top:15px; padding-bottom:10px;">$data.hInfo.title</h1>
                 <p style="color:#999; font-size:13px;">$data.hInfo.addTime<span style="margin-left:5px;margin-right:5px;">|</span>来自: 网络</p>
             </div>
-            <div style="background:url(http://39.105.196.3:8173/statics/images/dot.png); height:2px; margin-top:15px; margin-bottom:15px;"></div>
+            <div style="background:url(http://hyzx.100dh.cn/statics/images/dot.png); height:2px; margin-top:15px; margin-bottom:15px;"></div>
             <div class="neirong3">
                 <style>
                     .gqinfo {
@@ -129,21 +129,22 @@
                         </ul>
                     </div>
                     <div class="gqinfo-r">
-                        <img src="$data.hInfo.titleImg" alt="$data.hInfo.title" width="400" height="200" onerror="this.src='http://39.105.196.3:8173/statics/images/nopic.gif'" />
+                        <img src="$data.hInfo.titleImg" alt="$data.hInfo.title" width="400" height="200" onerror="this.src='http://hyzx.100dh.cn/statics/images/nopic.gif'" />
                     </div>
                 </div>
                 <div style="width:100%; overflow:hidden;" class="article_content">$data.hInfo.articlecontent</div>
             </div>
             <div class="neirong4" style="overflow:hidden;margin-top: 10px;">
                 <ul>
-                    <li>上一篇：<a href="$data.BPage.Href">$data.BPage.Title</a></li>
-                    <li>下一篇：<a href="$data.APage.Href">$data.APage.Title</a></li>
+                    <!--<li>上一篇：<a href="$data.BPage.Href">$data.BPage.Title</a></li>-->
+                    <li>
+                    <script language=javascript src='http://hyzx.100dh.cn/BAHandler.ashx?cId=$data.hInfo.columnId&Id=$data.hInfo.Id'></script></li>
                 </ul>
             </div>
         </div>
         <div class="swnr-r">
             <div class="fixed">
-                <script language=javascript src='http://39.105.196.3:4399/rightPageHandler.ashx?uname=$data.hInfo.username'></script>
+                <script language=javascript src='http://tool.100dh.cn/rightPageHandler.ashx?uname=$data.hInfo.username'></script>
                 <!--动态的，每小时更新一次-->
                 <div class="col-wrap">
                     <h3>公司产品</h3>
@@ -185,7 +186,7 @@
             })
         });</script>
     <div style="width:1178px;margin: 0 auto;border: #C2D2DF 1px dotted !important;padding: 10px;background:#FCFCFC;" id="mianze" rel="nofollow"></div>
-    <script language=javascript src='http://39.105.196.3:4399/FootHandler.ashx?uname=$data.username&realmId=' charset="utf-8"></script>
+    <script language=javascript src='http://tool.100dh.cn/FootHandler.ashx?uname=$data.hInfo.username&realmId=' charset="utf-8"></script>
     <div class="footer">
         <p>
             Copyright © 2015-

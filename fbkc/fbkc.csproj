@@ -71,14 +71,15 @@
   <ItemGroup>
     <Content Include="fbm.html" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="MainHandler.ashx" />
     <Content Include="sitemap.xml" />
     <Content Include="sitemaps.xml" />
     <Content Include="ModelHandler.ashx" />
+    <Content Include="BAHandler.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Newtonsoft.Json.dll" />
     <Content Include="NVelocity.dll" />
+    <Content Include="statics\css\show.css" />
     <Content Include="statics\css\slide.css" />
     <Content Include="statics\css\style.css" />
     <Content Include="statics\images\favicon.ico" />
@@ -88,13 +89,15 @@
     <Content Include="statics\images\search_but_1011.jpg" />
     <Content Include="statics\js\date.js" />
     <Content Include="statics\js\gundong.js" />
+    <Content Include="statics\js\jquery-1.9.1.min.js" />
+    <Content Include="statics\js\show.js" />
     <Content Include="statics\js\slide.js" />
     <Content Include="templates\404.html" />
-    <Content Include="templates\DetailModelSum.html" />
-    <Content Include="templates\DetailModel1.html" />
+    <Content Include="templates\BAPage.html" />
     <Content Include="templates\DetailModel.html" />
     <Content Include="templates\foot.html" />
     <Content Include="templates\head.html" />
+    <Content Include="templates\HtmlPage1.html" />
     <Content Include="templates\MoreProduct.html" />
     <Content Include="templates\MoreNews.html" />
     <Content Include="templates\Product.html" />
@@ -123,6 +126,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BAHandler.ashx.cs">
+      <DependentUpon>BAHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="BLL.cs" />
     <Compile Include="cmUserInfo.cs" />
     <Compile Include="columnInfo.cs" />
