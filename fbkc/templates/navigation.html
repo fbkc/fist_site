@@ -3,11 +3,11 @@
         <dt>相关类目：</dt>
         <dd>
             <ul id="ClassUL">
-                <li style=""><a href="handler/TestHandler.ashx?action=GetNews&cId=20">行业新闻</a></li>
+                <li style=""><a href="TestHandler.ashx?action=GetNews&cId=20">行业新闻</a></li>
                 #foreach($c in $data.columnsList)
                 #if($c.Id==20)
                 #else
-                <li style=""><a href="handler/TestHandler.ashx?action=GetProduct&cId=$c.Id">$c.columnName</a></li>
+                <li style=""><a href="TestHandler.ashx?action=GetProduct&cId=$c.Id">$c.columnName</a></li>
                 #end
                 #end
             </ul>
