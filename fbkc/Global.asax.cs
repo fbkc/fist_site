@@ -34,7 +34,7 @@ namespace fbkc
 
             //    string id = match.Groups[1].Value;
 
-            //    string s = "TestHandler.ashx?action=" + id;
+            //    string s = "handler/TestHandler.ashx?action=" + id;
 
             //    HttpContext.Current.RewritePath(s);
             //}

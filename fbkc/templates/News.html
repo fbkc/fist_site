@@ -39,8 +39,8 @@
     }
 </style>
 <div class="swdh">
-    当前位置：<a href="TestHandler.ashx?action=mainpage">首页</a> >
-         <a href="TestHandler.ashx?action=GetNews&cId=20">$data.columnName</a>
+    当前位置：<a href="handler/TestHandler.ashx?action=mainpage">首页</a> >
+         <a href="handler/TestHandler.ashx?action=GetNews&cId=20">$data.columnName</a>
 </div>
 #parse("navigation.html")
 <div class="swnr">
@@ -65,7 +65,7 @@
                     <a class="num">共$data.paraTotal条</a>
                     #if($data.pageIndex>1)
                     #set($upPage=$data.pageIndex+(-1))
-                    <a href="TestHandler.ashx?action=GetNews&cId=$data.cId&pageIndex=$upPage" class="previous"><b><i>上一页</i></b></a>
+                    <a href="handler/TestHandler.ashx?action=GetNews&cId=$data.cId&pageIndex=$upPage" class="previous"><b><i>上一页</i></b></a>
                     #end
 
                     #foreach($page in $data.pageData)
@@ -76,7 +76,7 @@
                     #end
                     #end
                     #if($data.pageIndex<$data.pageCount) #set($nextPage=$data.pageIndex+1)
-                    <a href="TestHandler.ashx?action=GetNews&cId=$data.cId&pageIndex=$nextPage" class="nextpage"><b><i>下一页</i></b></a>
+                    <a href="handler/TestHandler.ashx?action=GetNews&cId=$data.cId&pageIndex=$nextPage" class="nextpage"><b><i>下一页</i></b></a>
                     #end
                 </div>
             </div>

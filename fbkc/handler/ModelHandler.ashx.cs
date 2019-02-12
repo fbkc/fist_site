@@ -72,7 +72,7 @@ namespace fbkc
                 string showName = "show_" + cid + "_" + htmlId + ".html";
                 url = host + "test/" + username + "/" + showName;
                 hInfo.titleURL = url;
-                //hInfo.titleURL = string.Format("TestHandler.ashx?action=DetailPage&cId={0}&Id={1}", cid, htmlId);
+                //hInfo.titleURL = string.Format("handler/TestHandler.ashx?action=DetailPage&cId={0}&Id={1}", cid, htmlId);
                 //url = host + hInfo.titleURL;
                 hInfo.pinpai = context.Request["pinpai"];
                 hInfo.xinghao = context.Request["xinghao"];

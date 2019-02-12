@@ -19,7 +19,7 @@ namespace fbkc
     public class TestHandler : IHttpHandler
     {
         private string hostName = "100导航";
-        private string hostUrl = "http://hyzx.100dh.cn:8173/";
+        private string hostUrl = "http://hyzx.100dh.cn/";
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/html";
@@ -126,7 +126,7 @@ namespace fbkc
             object[] pageData = new object[pageCount];
             for (int i = 0; i < pageCount; i++)
             {
-                pageData[i] = new { Href = "TestHandler.ashx?action=GetProduct&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
+                pageData[i] = new { Href = "handler/TestHandler.ashx?action=GetProduct&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
             }
             var data = new
             {
@@ -171,7 +171,7 @@ namespace fbkc
             object[] pageData = new object[pageCount];
             for (int i = 0; i < pageCount; i++)
             {
-                pageData[i] = new { Href = "TestHandler.ashx?action=GetNews&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
+                pageData[i] = new { Href = "handler/TestHandler.ashx?action=GetNews&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
             }
             var data = new
             {
