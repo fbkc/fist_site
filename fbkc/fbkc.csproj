@@ -71,6 +71,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="handler\MainHandler.ashx" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="sitemap.xml" />
     <Content Include="sitemaps.xml" />
     <Content Include="handler\ModelHandler.ashx" />
