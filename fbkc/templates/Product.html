@@ -1,5 +1,5 @@
 ﻿#parse("head.html")
-<script type="text/javascript" src="../statics/js/jquery.lazyload"></script>
+<script type="text/javascript" src="http://hyzx.100dh.cn/statics/js/jquery.lazyload"></script>
 <style type="text/css">
     .swnlist-t {
         font-size: 18px;
@@ -52,9 +52,9 @@
     }
 </style>
 <div class="swdh">
-    当前位置：<a href="TestHandler.ashx?action=mainpage">首页</a> >
-    <a href="TestHandler.ashx?action=MoreProduct">产品栏目</a> >
-    <a href="TestHandler.ashx?action=GetProduct&cId=$data.cId">$data.columnName</a> >
+    当前位置：<a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=mainpage">首页</a> >
+    <a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=MoreProduct">产品栏目</a> >
+    <a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=GetProduct&cId=$data.cId">$data.columnName</a> >
 </div>
     #parse("navigation.html")
 <div class="swnr">
@@ -87,7 +87,7 @@
                                 #if($p.ten_qq)
                                 <span class="fr f_gray">
                                     <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=&gt;$p.ten_qq&amp;site=qq&amp;menu=yes" target="_blank" rel="nofollow">
-                                        <img src="../statics/images/qq.gif" title="点击QQ交谈/留言" alt="" align="absmiddle" original="../statics/images/qq.gif">
+                                        <img src="http://hyzx.100dh.cn/statics/images/qq.gif" title="点击QQ交谈/留言" alt="" align="absmiddle" original="http://hyzx.100dh.cn/statics/images/qq.gif">
                                     </a>&nbsp;
                                 </span>
                                 #else
@@ -113,7 +113,7 @@
                     <a href="handler/TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=1"></a>-->
                     #if($data.pageIndex>1)
                     #set($upPage=$data.pageIndex+(-1))
-                    <a href="handler/TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$upPage" class="previous"><b><i>上一页</i></b></a>
+                    <a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$upPage" class="previous"><b><i>上一页</i></b></a>
                     #end
 
                     #foreach($page in $data.pageData)
@@ -124,7 +124,7 @@
                     #end
                     #end
                     #if($data.pageIndex<$data.pageCount) #set($nextPage=$data.pageIndex+1)
-                    <a href="handler/TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$nextPage" class="nextpage"><b><i>下一页</i></b></a>
+                    <a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$nextPage" class="nextpage"><b><i>下一页</i></b></a>
                     #end
                     <!--最后一页
                     <a href="handler/TestHandler.ashx?action=GetProduct&cId=$data.cId&pageIndex=$data.pageCount"></a>-->
@@ -146,7 +146,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function () { $("img").lazyload({ placeholder: "../statics/images/nopic.gif", effect: "fadeIn" }); });
+    $(function () { $("img").lazyload({ placeholder: "http://hyzx.100dh.cn/statics/images/nopic.gif", effect: "fadeIn" }); });
     $(document).ready(function (e) {
         t = $('.fixed').offset().top;
         mh = $('.main').height(); fh = $('.fixed').height();

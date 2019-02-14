@@ -1,8 +1,8 @@
 ﻿#parse("head.html")
 #parse("navigation.html")
-<link href="../statics/css/slide.css" rel="stylesheet" type="text/css" />
-<script src="../statics/js/responsiveslides.min.js"></script>
-<script src="../statics/js/slide.js"></script>
+<link href="http://hyzx.100dh.cn/statics/css/slide.css" rel="stylesheet" type="text/css" />
+<script src="http://hyzx.100dh.cn/statics/js/responsiveslides.min.js"></script>
+<script src="http://hyzx.100dh.cn/statics/js/slide.js"></script>
 <style type="text/css">
     .slide_nav {
         display: none;
@@ -23,7 +23,7 @@
                     #foreach($h in $data.lunboTitle)
                     <li>
                         <a href="$h.titleURL" target="_blank">
-                            <img src="$h.titleImg" onerror="this.src = '../statics/images/nopic.gif'" />
+                            <img src="$h.titleImg" onerror="this.src = 'http://hyzx.100dh.cn/statics/images/nopic.gif'" />
                             <p class="caption">$h.title</p>
                         </a>
                     </li>
@@ -51,7 +51,7 @@
                 <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
                 #end
             </ul>
-            <div class="listmore"><a href="TestHandler.ashx?action=MoreProduct" target="_blank">更多产品</a></div>
+            <div class="listmore"><a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=MoreProduct" target="_blank">更多产品</a></div>
         </div>
     </div>
     <div class="list2">
@@ -64,28 +64,8 @@
                 <li><a href="$h.titleURL" title="$h.title" target="_blank">·$h.title</a></li>
                 #end
             </ul>
-            <div class="listmore"><a href="TestHandler.ashx?action=MoreNews" target="_blank">更多新闻</a></div>
+            <div class="listmore"><a href="http://hyzx.100dh.cn/handler/TestHandler.ashx?action=MoreNews" target="_blank">更多新闻</a></div>
         </div>
     </div>
 </div>
-<script src="../statics/js/gundong.js"></script>
-<div style="width:1178px;margin: 0 auto;border: #C2D2DF 1px dotted !important;padding: 10px;background:#FCFCFC;" id="mianze" rel="nofollow"></div>
-<script language=javascript src='http://vip.hsoow.com/?a=foot&name=&from=cnhbw' charset="utf-8"></script> <div class="footer">
-    <p>
-        Copyright © 2015-
-        <script type="text/javascript">var date = new Date; document.write(date.getFullYear());</script>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="../sitemaps.xml">百度地图</a>
-        &nbsp;&nbsp;
-        <a target="_blank" href="../sitemap.html">网站地图</a>
-    </p>
-</div>
-<script>
-    (function () {
-        var bp = document.createElement('script'); var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') { bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; }
-        else { bp.src = 'http://push.zhanzhang.baidu.com/push.js'; }
-        var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(bp, s);
-    })();</script>
-</body>
-</html> 
+#parse("foot.html")

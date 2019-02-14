@@ -97,7 +97,6 @@
     <Content Include="templates\DetailModel.html" />
     <Content Include="templates\foot.html" />
     <Content Include="templates\head.html" />
-    <Content Include="templates\HtmlPage1.html" />
     <Content Include="templates\MoreProduct.html" />
     <Content Include="templates\MoreNews.html" />
     <Content Include="templates\Product.html" />

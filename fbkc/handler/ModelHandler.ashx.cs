@@ -18,7 +18,7 @@ namespace fbkc
     public class ModelHandler : IHttpHandler
     {
         private BLL bll = new BLL();
-        private string host = "http://hyzx.100dh.cn:8173/";
+        private string host = "http://hyzx.100dh.cn/";
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";

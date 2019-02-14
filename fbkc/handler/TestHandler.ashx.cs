@@ -126,7 +126,7 @@ namespace fbkc
             object[] pageData = new object[pageCount];
             for (int i = 0; i < pageCount; i++)
             {
-                pageData[i] = new { Href = "handler/TestHandler.ashx?action=GetProduct&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
+                pageData[i] = new { Href = "http://hyzx.100dh.cn/handler/TestHandler.ashx?action=GetProduct&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
             }
             var data = new
             {
@@ -171,7 +171,7 @@ namespace fbkc
             object[] pageData = new object[pageCount];
             for (int i = 0; i < pageCount; i++)
             {
-                pageData[i] = new { Href = "handler/TestHandler.ashx?action=GetNews&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
+                pageData[i] = new { Href = "http://hyzx.100dh.cn/handler/TestHandler.ashx?action=GetNews&cId=" + cId + "&pageIndex=" + (i + 1), Title = i + 1 };
             }
             var data = new
             {
