@@ -70,7 +70,7 @@ namespace fbkc
                 long htmlId = (bll.GetMaxId() + 1);
                 hInfo.Id = htmlId;
                 string showName = "show_" + cid + "_" + htmlId + ".html";
-                url = host + "test/" + username + "/" + showName;
+                url = host + username + "/" + showName;
                 hInfo.titleURL = url;
                 //hInfo.titleURL = string.Format("handler/TestHandler.ashx?action=DetailPage&cId={0}&Id={1}", cid, htmlId);
                 //url = host + hInfo.titleURL;
@@ -130,7 +130,7 @@ namespace fbkc
         public static bool WriteFile(string moduleHtml, string htmlfilename, string username)
         {
             //文件输出目录
-            string path = HttpContext.Current.Server.MapPath("~/test/" + username + "/");
+            string path = HttpContext.Current.Server.MapPath("~/" + username + "/");
             //无此路径，则创建路径
             if (!Directory.Exists(path))
             {
